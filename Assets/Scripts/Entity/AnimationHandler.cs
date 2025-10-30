@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+﻿using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
@@ -18,43 +15,40 @@ public class AnimationHandler : MonoBehaviour
 
     private Animator animator;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }
 
-    public void UpdateState(Vector2 direction)
+    public void Move(Vector2 obj)
     {
-        if(Mathf.Approximately(direction.x, 0) && Mathf.Approximately(direction.y, 0))
+        bool isMoving = obj.magnitude > 0.5f;
+
+        if (isMoving)
         {
-            animator.SetBool("IsMove", false);
+            if (obj.x > 0)
+            {
+                animator.Play(MoveRight);
+            }
+            else if (obj.x < 0)
+            {
+                animator.Play(MoveLeft);
+            }
+            else
+            {
+                if (obj.y > 0)
+                {
+                    animator.Play(MoveUp);
+                }
+                else if (obj.y < 0)
+                {
+                    animator.Play(MoveDown);
+                }
+            }
         }
         else
         {
-            animator.SetBool("IsMove", true);
+            animator.Play(Idle);
         }
-
-        animator.SetFloat("InputX", direction.x);
-        animator.SetFloat("InputY", direction.y);
-    }
-
-    public void Attack(Vector2 target)
-    { 
-        SetDefault();
-
-        animator.SetBool("isLeft", target.x < 0 && target.y >= 0 || target.y < 0);
-        animator.SetBool("isRight", target.x > 0 && target.y >= 0 || target.y < 0);
-        animator.SetBool("isDown", target.y < 0 && target.x == 0);
-        animator.SetBool("isUp", target.y > 0 && target.x == 0);
-
-        animator.SetTrigger("isAttack");
-    }
-
-    public void SetDefault()
-    {
-        animator.SetBool("isLeft", false);
-        animator.SetBool("isRight", false);
-        animator.SetBool("isDown", false);
-        animator.SetBool("isUp",false);
     }
 }
