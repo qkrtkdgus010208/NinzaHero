@@ -1,13 +1,26 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class AnimationHandler : MonoBehaviour
 {
+    //private static readonly int IsMoving = Animator.StringToHash("IsMove");
+    private static readonly int MoveUp = Animator.StringToHash("MoveUp");
+    private static readonly int MoveDown = Animator.StringToHash("MoveDown");
+    private static readonly int MoveLeft = Animator.StringToHash("MoveLeft");
+    private static readonly int MoveRight = Animator.StringToHash("MoveRight");
+    //private static readonly int AttackUp = Animator.StringToHash("AttackUp");
+    //private static readonly int AttackDown = Animator.StringToHash("AttackDown");
+    //private static readonly int AttackLeft = Animator.StringToHash("AttackLeft");
+    //private static readonly int AttackRight = Animator.StringToHash("AttackRight");
+    private static readonly int Idle = Animator.StringToHash("Idle");
+
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
     private static readonly int IsLeft = Animator.StringToHash("isLeft");
     private static readonly int IsFront = Animator.StringToHash("isFront");
     private static readonly int IsBack = Animator.StringToHash("isBack");
@@ -39,7 +52,7 @@ public class AnimationHandler : MonoBehaviour
     }
 
     public void Attack(Vector2 target)
-    {
+    void Update()
         SetDefault();
 
         animator.SetBool("isLeft", target.x < 0 && target.y >= 0 || target.y < 0);
@@ -56,5 +69,7 @@ public class AnimationHandler : MonoBehaviour
         animator.SetBool("isRight", false);
         animator.SetBool("isDown", false);
         animator.SetBool("isUp",false);
+        
+        
     }
 }

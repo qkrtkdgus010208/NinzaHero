@@ -1,86 +1,112 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    [SerializeField] protected SpriteRenderer playerSr;
+    private Rigidbody2D rigid;
+    private Animator animator;
+    private AnimationHandler animationHandler;
+    protected StatHandler statHandler;
+    protected WeaponHandler weaponHandler;
 
-    protected Vector2 moveDirection = Vector2.zero;
-    public Vector2 MoveDirection { get { return moveDirection; } }
+    protected Vector2 movementDirection = Vector2.zero;
+    public Vector2 MovementDirection { get { return movementDirection; } }
 
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    private Rigidbody2D _rigidbody;
-    private AnimationHandler anime;
-    private BoxCollider2D areaBox;
-    private float speed = 5.0f;
-    private bool isMoving;
-    private float throwingSpd = 10f;
-    private Vector3 targetPos;
-    public GameObject shuriken;
-    public Vector2 weaponDir;
-    public Shuriken kill;
+    private Vector2 knockback = Vector2.zero;
+    private float knockbackDuration = 0.0f;
 
-    protected virtual void Awake()
+    private float timeSinceLastAttack = float.MaxValue;
+    protected bool isAttacking;
+
+    private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        anime = GetComponent<AnimationHandler>();
-        areaBox = GetComponentInChildren<BoxCollider2D>();
+        rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+        animationHandler = GetComponent<AnimationHandler>();
+        statHandler = GetComponent<StatHandler>();
+        weaponHandler = GetComponent<WeaponHandler>();
     }
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-    }
-
-    // Update is called once per frame
     protected virtual void Update()
     {
-        Action();
-        anime.UpdateState(moveDirection);
+        HandleAction();
+        HandleAttackDelay();
     }
 
-    protected virtual void FixedUpdate()
+    protected void FixedUpdate()
     {
-        Moving(MoveDirection);
-    }
-
-    protected virtual void Action()
-    {
-
-    }
-
-    private void Moving(Vector2 direction)
-    {
-        if (direction == Vector2.zero) isMoving = false;
-        else isMoving = true;
-
-        direction = direction * speed;
-        _rigidbody.velocity = direction;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isMoving) return;
-
-        if(collision.gameObject.CompareTag("Monster"))
+        Movment(movementDirection);
+        if (knockbackDuration > 0.0f)
         {
-            targetPos = collision.gameObject.transform.position;
-            InvokeRepeating("Throwing", 0.0f, 2.0f);
+            knockbackDuration -= Time.fixedDeltaTime;
         }
     }
 
-    private void Throwing()
+    protected virtual void HandleAction()
     {
-        float posX = transform.position.x;
-        float posY = transform.position.y;
-        Vector2 targetDir = new Vector2(targetPos.x, targetPos.y);
-        weaponDir = new Vector2(posX, posY + 0.5f);
 
-        Instantiate(shuriken, weaponDir, Quaternion.identity);
+    }
 
-        anime.Attack((targetDir - weaponDir).normalized);
+    private void Movment(Vector2 direction)
+    {
+        direction = direction * statHandler.Speed;
+        if (knockbackDuration > 0.0f)
+        {
+            direction *= 0.2f;
+            direction += knockback;
+        }
+
+        rigid.velocity = direction;
+        animationHandler.Move(direction);
+    }
+
+    public void ApplyKnockback(Transform other, float power, float duration)
+    {
+        knockbackDuration = duration;
+        knockback = -(other.position - transform.position).normalized * power;
+    }
+
+    private void HandleAttackDelay()
+    {
+        if (weaponHandler == null)
+            return;
+
+        if (timeSinceLastAttack <= weaponHandler.Delay)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+        }
+
+        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        {
+            timeSinceLastAttack = 0;
+            Attack();
+        }
+    }
+
+    private void Attack()
+    {
+        if (lookDirection != Vector2.zero)
+            weaponHandler?.Attack();
+    }
+
+    public virtual void Death()
+    {
+        rigid.velocity = Vector3.zero;
+
+        foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            Color color = renderer.color;
+            color.a = 0.3f;
+            renderer.color = color;
+        }
+
+        foreach (Behaviour component in transform.GetComponentsInChildren<Behaviour>())
+        {
+            component.enabled = false;
+        }
+
+        Destroy(gameObject, 0.5f);
     }
 }
