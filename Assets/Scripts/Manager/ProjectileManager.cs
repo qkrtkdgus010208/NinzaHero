@@ -7,6 +7,11 @@ public class ProjectileManager : MonoBehaviour
 
     [SerializeField] private GameObject[] projectilePrefabs;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPostiion, Vector2 direction)
     {
         GameObject origin = projectilePrefabs[rangeWeaponHandler.BulletIndex];

@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
     private ProjectileManager projectileManager;
     private RangeWeaponHandler rangeWeaponHandler;
 
+    private Transform pivot;
     private Vector2 direction;
     private float currentDuration;
     private bool isReady;
@@ -17,6 +18,7 @@ public class ProjectileController : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        pivot = transform.GetChild(0);
     }
 
     private void Update()

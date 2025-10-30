@@ -5,10 +5,8 @@ public class BaseController : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator animator;
     private AnimationHandler animationHandler;
-    private StatHandler statHandler;
-    private WeaponHandler weaponHandler;
-
-    [SerializeField] private Transform firePoint;
+    protected StatHandler statHandler;
+    protected WeaponHandler weaponHandler;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -20,6 +18,7 @@ public class BaseController : MonoBehaviour
     private float knockbackDuration = 0.0f;
 
     private float timeSinceLastAttack = float.MaxValue;
+    protected bool isAttacking;
 
     private void Awake()
     {
@@ -79,7 +78,7 @@ public class BaseController : MonoBehaviour
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (timeSinceLastAttack > weaponHandler.Delay)
+        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
         {
             timeSinceLastAttack = 0;
             Attack();
@@ -88,7 +87,8 @@ public class BaseController : MonoBehaviour
 
     private void Attack()
     {
-        weaponHandler?.Attack();
+        if (lookDirection != Vector2.zero)
+            weaponHandler?.Attack();
     }
 
     public virtual void Death()
@@ -107,6 +107,6 @@ public class BaseController : MonoBehaviour
             component.enabled = false;
         }
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 0.5f);
     }
 }

@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bcd6dd1dabdde4e8a278a3862e0d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 8829709408067748273}
 --- !u!114 &2150622083959865748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,9 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500
-  attack: 100
   speed: 3
-  projectileCount: 1
 --- !u!114 &5157777933578794931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,19 +313,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
-  power: 1
-  speed: 1
+  power: 100
+  speed: 10
   attackRange: 10
   target:
     serializedVersion: 2
     m_Bits: 128
   isOnKnockback: 1
-  knockbackPower: 0.1
-  knockbackTime: 0.5
+  knockbackPower: 1
+  knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 8829709408067748273}
   bulletIndex: 0
   bulletSize: 1
-  duration: 0
+  duration: 3
+  spread: 0
+  numberofProjectilesPerShot: 1
+  multipleProjectilesAngel: 0
 --- !u!114 &5958447564857815031
 MonoBehaviour:
   m_ObjectHideFlags: 0
