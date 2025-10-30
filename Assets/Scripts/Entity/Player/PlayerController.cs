@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameManager gameManager;
+
+    public void Init(GameManager gameManager)
     {
-        
+        this.gameManager = gameManager;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Death()
     {
-        
+        base.Death();
+        gameManager.GameOver();
+    }
+
+    void OnMove(InputValue inputValue)
+    {
+        movementDirection = inputValue.Get<Vector2>();
+        movementDirection = movementDirection.normalized;
     }
 }
