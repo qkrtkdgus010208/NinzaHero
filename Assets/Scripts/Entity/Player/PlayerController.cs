@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Action()
     {
-        
+        float horizon = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector2(horizon, vertical);
+
+        if(moveDirection.magnitude != 0f)
+        {
+            moveDirection = moveDirection.normalized;
+        }
+        else
+        {
+            moveDirection = Vector2.zero;
+        }
+
+        lookDirection = moveDirection;
     }
 }
