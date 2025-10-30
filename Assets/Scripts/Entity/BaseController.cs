@@ -14,11 +14,20 @@ public class BaseController : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private AnimationHandler anime;
+    private BoxCollider2D areaBox;
+    private float speed = 5.0f;
+    private bool isMoving;
+    private float throwingSpd = 10f;
+    private Vector3 targetPos;
+    public GameObject shuriken;
+    public Vector2 weaponDir;
+    public Shuriken kill;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         anime = GetComponent<AnimationHandler>();
+        areaBox = GetComponentInChildren<BoxCollider2D>();
     }
 
     // Start is called before the first frame update
@@ -30,12 +39,12 @@ public class BaseController : MonoBehaviour
     protected virtual void Update()
     {
         Action();
-        Look(lookDirection);
+        anime.UpdateState(moveDirection);
     }
 
     protected virtual void FixedUpdate()
     {
-        Moving(moveDirection);
+        Moving(MoveDirection);
     }
 
     protected virtual void Action()
@@ -45,35 +54,33 @@ public class BaseController : MonoBehaviour
 
     private void Moving(Vector2 direction)
     {
-        direction *= 5f;
+        if (direction == Vector2.zero) isMoving = false;
+        else isMoving = true;
 
+        direction = direction * speed;
         _rigidbody.velocity = direction;
-        // 애니메이션 핸들러 호출
     }
 
-    private void Look(Vector2 direction)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 135f && Mathf.Abs(rotZ) <= 270f;
-        bool isUp = Mathf.Abs(rotZ) > 90f && Mathf.Abs(rotZ) <= 180f;
-        bool isRight = Mathf.Abs(rotZ) > 45f && Mathf.Abs(rotZ) <= 90;
+        if (isMoving) return;
 
-
-        if(isLeft)
+        if(collision.gameObject.CompareTag("Monster"))
         {
-
+            targetPos = collision.gameObject.transform.position;
+            InvokeRepeating("Throwing", 0.0f, 2.0f);
         }
-        else if(isUp)
-        {
+    }
 
-        }
-        else if(isRight)
-        {
+    private void Throwing()
+    {
+        float posX = transform.position.x;
+        float posY = transform.position.y;
+        Vector2 targetDir = new Vector2(targetPos.x, targetPos.y);
+        weaponDir = new Vector2(posX, posY + 0.5f);
 
-        }
-        else
-        {
+        Instantiate(shuriken, weaponDir, Quaternion.identity);
 
-        }
+        anime.Attack((targetDir - weaponDir).normalized);
     }
 }

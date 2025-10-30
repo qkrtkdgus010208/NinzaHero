@@ -25,7 +25,5 @@ public class PlayerController : BaseController
         {
             moveDirection = Vector2.zero;
         }
-
-        lookDirection = moveDirection;
     }
 }

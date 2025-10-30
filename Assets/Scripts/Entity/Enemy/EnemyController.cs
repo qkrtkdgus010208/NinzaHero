@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Vector2 randomOffset;
+    private Vector2 originPos;
+    private Vector2 targetPos;
+
     void Start()
     {
-        
+        originPos = transform.position;
+        randomOffset = Random.insideUnitCircle * 5f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        targetPos = originPos + randomOffset;
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, Time.deltaTime * 2f);
     }
 }
