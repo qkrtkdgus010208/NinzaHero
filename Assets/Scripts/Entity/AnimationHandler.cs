@@ -18,19 +18,6 @@ public class AnimationHandler : MonoBehaviour
 
     private Animator animator;
 
-    private void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    private static readonly int IsLeft = Animator.StringToHash("isLeft");
-    private static readonly int IsFront = Animator.StringToHash("isFront");
-    private static readonly int IsBack = Animator.StringToHash("isBack");
-    private static readonly int IsAttack = Animator.StringToHash("isAttack");
-    private static readonly int WalkFront = Animator.StringToHash("WalkFront");
-    private static readonly int WalkBack = Animator.StringToHash("WalkBack");
-    private static readonly int WalkLeft = Animator.StringToHash("WalkLeft");
-
-    protected Animator animator;
-
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -52,7 +39,7 @@ public class AnimationHandler : MonoBehaviour
     }
 
     public void Attack(Vector2 target)
-    void Update()
+    { 
         SetDefault();
 
         animator.SetBool("isLeft", target.x < 0 && target.y >= 0 || target.y < 0);
@@ -69,7 +56,5 @@ public class AnimationHandler : MonoBehaviour
         animator.SetBool("isRight", false);
         animator.SetBool("isDown", false);
         animator.SetBool("isUp",false);
-        
-        
     }
 }
