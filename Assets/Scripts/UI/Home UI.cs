@@ -15,13 +15,22 @@ public class HomeUI : BaseUI
 
   }
 
+
+  private void Update()
+  {
+	
+
+
+  }
+
+
   public void OnClickStartButton()
   {
-
+	GameManager.Instance.StartGame();
   }
 
   protected override UIState GetUIState()
   {
-	throw new System.NotImplementedException();
+	return UIState.Home;
   }
 }
