@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public static bool isFirstLoading = true;
 
+    [SerializeField] private CameraConfinerSetter cameraConfinerSetter;
+
     private void Awake()
     {
         instance = this;
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
         currentStageIndex += 1;
         enemyManager.StartStage(1 + currentStageIndex);
         stageManager.StartStage(currentStageIndex);
+
+        cameraConfinerSetter.SetConfinerBoundingShape();
     }
 
     public void EndOfStage()

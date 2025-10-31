@@ -7,12 +7,7 @@ public class CameraConfinerSetter : MonoBehaviour
 
     [SerializeField] private GameObject[] boundingAreaObjects;
 
-    void Start()
-    {
-        SetConfinerBoundingShape();
-    }
-
-    private void SetConfinerBoundingShape()
+    public void SetConfinerBoundingShape()
     {
         if (cinemachineConfiner2D == null)
         {
@@ -24,7 +19,7 @@ public class CameraConfinerSetter : MonoBehaviour
         {
             Debug.LogError("Bounding Area Object가 존재하지 않습니다.");
             return;
-        }
+        }   
 
         int stageIndex = GameManager.Instance.stageIndex;
         int index;
@@ -38,7 +33,7 @@ public class CameraConfinerSetter : MonoBehaviour
         else 
             index = 3;
 
-            PolygonCollider2D boundaryCollider = boundingAreaObjects[index].GetComponent<PolygonCollider2D>();
+        PolygonCollider2D boundaryCollider = boundingAreaObjects[index].GetComponent<PolygonCollider2D>();
 
         if (boundaryCollider == null)
         {
