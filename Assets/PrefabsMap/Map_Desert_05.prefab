@@ -27416,6 +27416,30 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[688].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 8951386924399769495}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 8279292856632400980}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1496883847597197873}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 5209692066101933442}
+    - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+      propertyPath: spawnPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 7682518918097472216}
     - target: {fileID: 7220014822491081581, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.6
@@ -34569,6 +34593,11 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 145161859156707260}
+--- !u!4 &1496883847597197873 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 922934650773665483, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+  m_PrefabInstance: {fileID: 1732500203389222138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2472066672706536554 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4198929679569074320, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
@@ -34661,3 +34690,23 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!4 &5209692066101933442 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5784760014269008248, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+  m_PrefabInstance: {fileID: 1732500203389222138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7682518918097472216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8257026118815938082, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+  m_PrefabInstance: {fileID: 1732500203389222138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8279292856632400980 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7705350264664793262, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+  m_PrefabInstance: {fileID: 1732500203389222138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8951386924399769495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7220014822491081581, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
+  m_PrefabInstance: {fileID: 1732500203389222138}
+  m_PrefabAsset: {fileID: 0}
