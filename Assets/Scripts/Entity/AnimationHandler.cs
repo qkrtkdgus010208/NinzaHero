@@ -2,16 +2,9 @@
 
 public class AnimationHandler : MonoBehaviour
 {
-    //private static readonly int IsMoving = Animator.StringToHash("IsMove");
-    private static readonly int MoveUp = Animator.StringToHash("MoveUp");
-    private static readonly int MoveDown = Animator.StringToHash("MoveDown");
-    private static readonly int MoveLeft = Animator.StringToHash("MoveLeft");
-    private static readonly int MoveRight = Animator.StringToHash("MoveRight");
-    //private static readonly int AttackUp = Animator.StringToHash("AttackUp");
-    //private static readonly int AttackDown = Animator.StringToHash("AttackDown");
-    //private static readonly int AttackLeft = Animator.StringToHash("AttackLeft");
-    //private static readonly int AttackRight = Animator.StringToHash("AttackRight");
-    private static readonly int Idle = Animator.StringToHash("Idle");
+    private static readonly int IsMoving = Animator.StringToHash("IsMove");
+    private static readonly int MoveX = Animator.StringToHash("MoveX");
+    private static readonly int MoveY = Animator.StringToHash("MoveY");
 
     private Animator animator;
 
@@ -23,32 +16,10 @@ public class AnimationHandler : MonoBehaviour
     public void Move(Vector2 obj)
     {
         bool isMoving = obj.magnitude > 0.5f;
+        Vector2 normalized = obj.normalized;
 
-        if (isMoving)
-        {
-            if (obj.x > 0)
-            {
-                animator.Play(MoveRight);
-            }
-            else if (obj.x < 0)
-            {
-                animator.Play(MoveLeft);
-            }
-            else
-            {
-                if (obj.y > 0)
-                {
-                    animator.Play(MoveUp);
-                }
-                else if (obj.y < 0)
-                {
-                    animator.Play(MoveDown);
-                }
-            }
-        }
-        else
-        {
-            animator.Play(Idle);
-        }
+        animator.SetBool(IsMoving, isMoving);
+        animator.SetFloat(MoveX, normalized.x);
+        animator.SetFloat(MoveY, normalized.y);
     }
 }
