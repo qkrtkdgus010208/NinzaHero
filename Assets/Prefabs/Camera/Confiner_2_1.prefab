@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7001378972360714958}
   - component: {fileID: 1935103228206911033}
   m_Layer: 0
-  m_Name: Confiner
+  m_Name: Confiner_2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -6.13, y: 25.7}
-      - {x: 5.85, y: 25.7}
+      - {x: 5.9, y: 25.7}
+      - {x: 5.9, y: 44.7}
+      - {x: 17.9, y: 44.7}
+      - {x: 17.9, y: 14.76}
+      - {x: 5.85, y: 14.76}
       - {x: 5.85, y: -9.27}
       - {x: -6.13, y: -9.27}
   m_UseDelaunayMesh: 0

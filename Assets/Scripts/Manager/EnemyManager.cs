@@ -20,10 +20,12 @@ public class EnemyManager : MonoBehaviour
     private bool enemySpawnComplite;
 
     private GameManager gameManager;
+    private StageManager stageManager;
 
-    public void Init(GameManager gameManager)
+    public void Init(GameManager gameManager, StageManager stageManager)
     {
         this.gameManager = gameManager;
+        this.stageManager = stageManager;
     }
 
     public void StartStage(int stageCount)
@@ -48,7 +50,6 @@ public class EnemyManager : MonoBehaviour
     {
         enemySpawnComplite = false;
 
-        yield return new WaitForSeconds(1f);
         for (int i = 0; i < stageCount; i++)
         {
             yield return null;
@@ -60,40 +61,22 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnRandomEnemy()
     {
-        if (enemyPrefabs.Count == 0 || spawnAreas.Count == 0)
+        if (enemyPrefabs.Count == 0 || stageManager.ActiveStage == null)
         {
-            Debug.LogWarning("Enemy Prefabs 또는 Spawn Areas가 설정되지 않았습니다.");
+            Debug.LogWarning("Enemy Prefabs 또는 ActiveStage가 설정되지 않았습니다.");
             return;
         }
 
         GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
 
-        Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-        Vector2 randomPosition = new Vector2(
-            Random.Range(randomArea.xMin, randomArea.xMax),
-            Random.Range(randomArea.yMin, randomArea.yMax)
-        );
+        Transform spawnPoint = stageManager.ActiveStage.spawnPoints[Random.Range(0, stageManager.ActiveStage.spawnPoints.Length)];
 
         // 적 생성 및 리스트에 추가
-        GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
+        GameObject spawnedEnemy = Instantiate(randomPrefab, spawnPoint.position, Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
         enemyController.Init(this, gameManager.player.transform);
 
         activeEnemies.Add(enemyController);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (spawnAreas == null) return;
-
-        Gizmos.color = gizmoColor;
-        foreach (var area in spawnAreas)
-        {
-            Vector3 center = new Vector3(area.x + area.width / 2, area.y + area.height / 2);
-            Vector3 size = new Vector3(area.width, area.height);
-            Gizmos.DrawCube(center, size);
-        }
     }
 
     public void RemoveEnemyOnDeath(EnemyController enemy)
