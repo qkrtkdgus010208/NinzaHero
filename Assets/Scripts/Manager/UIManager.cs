@@ -7,7 +7,6 @@ public enum UIState
   Home,
   Game,
   GameOver
-
 }
 
 public class UIManager : MonoBehaviour

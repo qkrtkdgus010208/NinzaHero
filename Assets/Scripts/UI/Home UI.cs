@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HomeUI : MonoBehaviour
+public class HomeUI : BaseUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  [SerializeField] private Button StartButton;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public override void Init(UIManager uiManager)
+  {
+	base.Init(uiManager);
+
+	StartButton.onClick.AddListener(OnClickStartButton);
+
+  }
+
+  public void OnClickStartButton()
+  {
+
+  }
+
+  protected override UIState GetUIState()
+  {
+	throw new System.NotImplementedException();
+  }
 }
