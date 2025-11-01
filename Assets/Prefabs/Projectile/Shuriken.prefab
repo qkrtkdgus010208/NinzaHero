@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1853972955664863206}
   - component: {fileID: 1587347073946869978}
   - component: {fileID: 2430063595684905177}
-  - component: {fileID: 4025155077583127078}
+  - component: {fileID: -9082949102290221973}
   m_Layer: 0
   m_Name: Shuriken
   m_TagString: Untagged
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4025155077583127078
+--- !u!114 &-9082949102290221973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
