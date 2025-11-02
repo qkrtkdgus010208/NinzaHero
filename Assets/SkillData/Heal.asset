@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e2ebc051a96974ba9293f5602f31e0, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  skillType: 6
-  skillId: 6
+  skillType: 5
+  skillId: 5
   skillName: "\uD790\uB9C1 \uD3EC\uC158"
   skillDesc: "\uC0DD\uBA85\uB825 \uC804\uCCB4 \uD68C\uBCF5"
   skillIcon: {fileID: 21300000, guid: 833975e8448fd0d479508c7d2c7f9b2d, type: 3}
-  baseStat: 0
+  baseStat: 1000
   upgradeStats:
   - 0
   - 0

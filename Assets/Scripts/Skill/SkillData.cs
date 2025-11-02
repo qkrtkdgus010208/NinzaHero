@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : ScriptableObject
 {
-    public enum SkillType { Hp, MoveSpeed, AttackSpeed, Power, Range, Count, Heal }
+    public enum SkillType { MoveSpeed, AttackSpeed, Power, Range, Count, Heal }
 
     [Header("# Main Info")]
     public SkillType skillType;

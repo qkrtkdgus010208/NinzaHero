@@ -257,6 +257,10 @@ PrefabInstance:
       propertyPath: multipleProjectilesAngel
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7801921686987485362, guid: cbc5df0180b7914428a2c4e661b696de, type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
