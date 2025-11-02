@@ -254,6 +254,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6537604416325704913, guid: cbc5df0180b7914428a2c4e661b696de, type: 3}
+      propertyPath: bulletSize
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537604416325704913, guid: cbc5df0180b7914428a2c4e661b696de, type: 3}
       propertyPath: multipleProjectilesAngel
       value: 3
       objectReference: {fileID: 0}
