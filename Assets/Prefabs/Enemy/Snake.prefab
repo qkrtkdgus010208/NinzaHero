@@ -218,7 +218,7 @@ MonoBehaviour:
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 3524132278741500974}
   bulletIndex: 2
-  bulletSize: 1
+  bulletSize: 0.75
   duration: 3
   spread: 0
   numberofProjectilesPerShot: 1
