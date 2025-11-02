@@ -2,30 +2,38 @@
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] stages;
+    [SerializeField] private StageController[] stages;
 
-    private int stageIndex;
+    public StageController ActiveStage { get; private set; }
+    
+    private GameManager gameManager;
+
+    public void Init(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
 
     public void StartStage(int stageCount)
     {
-        foreach (GameObject stage in stages)
+        foreach (StageController stage in stages)
         {
-            stage.SetActive(false);
+            stage.gameObject.SetActive(false);
         }
 
         if (stageCount == 1)
         {
-            stageIndex = Random.Range(0, 3);
+            gameManager.stageIndex = Random.Range(0, 3);
         }
         else if (stageCount == 2)
         {
-            stageIndex = Random.Range(3, 5);
+            gameManager.stageIndex = Random.Range(3, 5);
         }
         else
         {
-            stageIndex = 5;
+            gameManager.stageIndex = 5;
         }
 
-        stages[stageIndex].SetActive(true);
+        ActiveStage = stages[gameManager.stageIndex];
+        ActiveStage.gameObject.SetActive(true);
     }
 }

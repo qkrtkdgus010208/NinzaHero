@@ -9,17 +9,24 @@ public class GameManager : MonoBehaviour
     private ResourceController playerResourceController;
 
     private EnemyManager enemyManager;
+    private StageManager stageManager;
 
-    [SerializeField] private int currentStageIndex = 0;
+    [SerializeField] private int currentStageIndex = 0; // 1층, 2층, 3층
+    public int stageIndex; // 1층 : 0, 1, 2 / 2층 : 3, 4 / 3층 : 5
 
     public static bool isFirstLoading = true;
+
+    [SerializeField] private CameraConfinerSetter cameraConfinerSetter;
 
     private void Awake()
     {
         instance = this;
 
+        stageManager = GetComponentInChildren<StageManager>();
+        stageManager.Init(this);
+
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this);
+        enemyManager.Init(this, stageManager);
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
@@ -49,6 +56,9 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(0f, -7f, 0f);
         currentStageIndex += 1;
         enemyManager.StartStage(1 + currentStageIndex);
+        stageManager.StartStage(currentStageIndex);
+
+        cameraConfinerSetter.SetConfinerBoundingShape();
     }
 
     public void EndOfStage()
