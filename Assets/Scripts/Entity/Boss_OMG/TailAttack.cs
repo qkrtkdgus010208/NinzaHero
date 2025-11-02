@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class TailAttack : MonoBehaviour
 {
-    bool isActive = false;
-    float duration = 0f;
-    float maxExist = 2.0f;
+    [SerializeField] private LayerMask PlayerCollisionLayer;
+
+    Animator animator;
+    
     float damage = 2000f;
+    
+    bool isEnd = false;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
-        isActive = true;
+        animator.SetTrigger("IsActive");
     }
+
     // Update is called once per frame
     void Update()
     {
-        if(isActive)
+        if(isEnd)
         {
-            duration += Time.deltaTime;
-            
-            if(maxExist < duration)
-            {
-                DestroyTail();
-            }
+            DestroyTail();
         }
     }
 
     void DestroyTail()
     {
+        animator.SetTrigger("IsDestroy");
         Destroy(this.gameObject);
-        isActive = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void SetDamage(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
             ResourceController resource = collision.GetComponent<ResourceController>();
             if(resource != null)
@@ -43,9 +47,10 @@ public class TailAttack : MonoBehaviour
                 resource.ChangeHealth(-damage);
             }
         }
-        else
-        {
-            DestroyTail();
-        }    
     }
+
+    private void OnAnimationEnd()
+    {
+        isEnd = true;
+    }    
 }

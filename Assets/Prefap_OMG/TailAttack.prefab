@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4231570924947123563}
   - component: {fileID: 6083534729172163771}
   - component: {fileID: 6429721019696003082}
-  m_Layer: 0
+  - component: {fileID: 4704072725139826998}
+  m_Layer: 9
   m_Name: TailAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867223049740810685}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.31, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96,7 +97,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 200
   m_Sprite: {fileID: 0}
   m_Color: {r: 0.6698113, g: 0.41688874, b: 0, a: 1}
   m_FlipX: 0
@@ -108,6 +109,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4704072725139826998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867223049740810685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b1b5457aee6854b86fe6c023c7e11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCollisionLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1277570935398959764
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +135,9 @@ GameObject:
   - component: {fileID: 563043058742836302}
   - component: {fileID: 207040432845435336}
   - component: {fileID: 4041276864579427173}
-  m_Layer: 0
+  - component: {fileID: 6421296760157719381}
+  - component: {fileID: 981886975500687389}
+  m_Layer: 9
   m_Name: BodyEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +200,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 110
+  m_SortingOrder: 200
   m_Sprite: {fileID: 1218759218, guid: b7ff09693d80c324a9ed729a1ba06fed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -223,12 +241,51 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.006738648, y: 0.008908033}
   m_Size: {x: 0.2936382, y: 0.39431}
   m_Direction: 0
+--- !u!50 &6421296760157719381
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277570935398959764}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &981886975500687389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277570935398959764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0748ba4ddb89f9243971c50ca5665482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4283609018432177829
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7084907074336806618}
   - component: {fileID: 8131422499582023550}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WarningArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7571716603827147670}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RealAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
