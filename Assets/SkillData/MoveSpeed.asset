@@ -16,7 +16,7 @@ MonoBehaviour:
   skillId: 0
   skillName: "\uC2E0\uC18D\uD55C \uBAB8\uB180\uB9BC"
   skillDesc: "\uC774\uB3D9\uC18D\uB3C4 \uC0C1\uC2B9"
-  skillIcon: {fileID: 21300000, guid: 833975e8448fd0d479508c7d2c7f9b2d, type: 3}
+  skillIcon: {fileID: 21300000, guid: 0c6b0286db138a046a49b5c2f2024e19, type: 3}
   baseStat: 3
   upgradeStats:
   - 4
