@@ -1,39 +1,59 @@
-﻿using UnityEngine;
+﻿// StageManager.cs
+using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] private StageController[] stages;
-
-    public StageController ActiveStage { get; private set; }
-    
     private GameManager gameManager;
+    private EnemyManager enemyManager;
 
-    public void Init(GameManager gameManager)
+    // (있다면 사용, 없다면 없어도 됨) 스테이지별 적 수 배열
+    [SerializeField] private int[] enemiesPerStage = new int[] { 5, 7, 9 };
+
+    public void Init(GameManager gm)
     {
-        this.gameManager = gameManager;
+        gameManager = gm;
+        // EnemyManager 참조 캐시(자식에 붙어있다면)
+        enemyManager = gameManager.GetComponentInChildren<EnemyManager>();
     }
 
-    public void StartStage(int stageCount)
+    public void StartStage(int stageCountOrIndex)
     {
-        foreach (StageController stage in stages)
+        if (gameManager == null)
         {
-            stage.gameObject.SetActive(false);
+            Debug.LogError("[StageManager] Init이 먼저 호출되지 않았습니다.");
+            return;
+        }
+        if (enemyManager == null)
+        {
+            enemyManager = gameManager.GetComponentInChildren<EnemyManager>();
+            if (enemyManager == null)
+            {
+                Debug.LogError("[StageManager] EnemyManager를 찾을 수 없습니다.");
+                return;
+            }
         }
 
-        if (stageCount == 1)
+        // --- 핵심: 안전하게 적 수량 계산 ---
+        int enemyCount;
+        if (enemiesPerStage != null &&
+            enemiesPerStage.Length > 0 &&
+            stageCountOrIndex >= 0 &&
+            stageCountOrIndex < enemiesPerStage.Length)
         {
-            gameManager.stageIndex = Random.Range(0, 3);
-        }
-        else if (stageCount == 2)
-        {
-            gameManager.stageIndex = Random.Range(3, 5);
+            // 넘겨진 값을 "인덱스"로 해석
+            enemyCount = enemiesPerStage[stageCountOrIndex];
         }
         else
         {
-            gameManager.stageIndex = 5;
+            // 범위를 벗어나면 "그 값 자체를 적 수량"으로 해석
+            enemyCount = Mathf.Max(1, stageCountOrIndex);
         }
 
-        ActiveStage = stages[gameManager.stageIndex];
-        ActiveStage.gameObject.SetActive(true);
+        enemyManager.StartStage(enemyCount);
+    }
+
+    public void EndOfStage()
+    {
+        gameManager.EndOfStage();
     }
 }
