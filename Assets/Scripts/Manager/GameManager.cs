@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         stageManager.Init(this);
 
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this, stageManager);
+        enemyManager.Init(this);
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);

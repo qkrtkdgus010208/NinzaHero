@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 9142242561429248273}
   - component: {fileID: 5044473981223738068}
   - component: {fileID: 8177647883887469123}
+  - component: {fileID: 4745515495680010921}
   m_Layer: 7
-  m_Name: Mushroom
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,8 +34,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 7.1400003, y: 7.1400003, z: 7.1400003}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7221232712250055729}
   - {fileID: 2586518038113706690}
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,7 +134,7 @@ MonoBehaviour:
   contactUseKnockback: 1
   contactKnockbackPower: 4
   contactKnockbackTime: 0.12
-  useCharger: 0
+  useCharger: 1
   chargeWindup: 0.5
   chargeSpeed: 12
 --- !u!114 &8387614549538219123
@@ -198,11 +199,23 @@ MonoBehaviour:
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 2586518038113706690}
   bulletIndex: 1
-  bulletSize: 0.75
+  bulletSize: 1
   duration: 3
   spread: 0
   numberofProjectilesPerShot: 1
   multipleProjectilesAngel: 0
+--- !u!210 &4745515495680010921
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329761097385117548}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 50
+  m_SortAtRoot: 0
 --- !u!1 &7054645485301118091
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,8 +275,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.01, y: 3.01, z: 3.01}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7153980936000361599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -307,8 +320,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
-  m_Sprite: {fileID: -1531179240, guid: 1105433e93869a54db4e56f2ccef0f74, type: 3}
+  m_SortingOrder: 50
+  m_Sprite: {fileID: 21300000, guid: 17c291604a7375840bc905350b477335, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -327,7 +340,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7865543843532500445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6c637b1443df6864585fb81597f496ae, type: 2}
   m_CullingMode: 0

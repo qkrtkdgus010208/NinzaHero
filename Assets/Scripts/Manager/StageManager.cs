@@ -2,38 +2,71 @@
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] private StageController[] stages;
-
-    public StageController ActiveStage { get; private set; }
-    
     private GameManager gameManager;
+    private EnemyManager enemyManager;
 
-    public void Init(GameManager gameManager)
+    [Header("Stage Config")]
+    [Tooltip("스테이지별 적 수(인덱스로 접근). 비워두면 StartStage 인자를 '수량'으로 해석합니다.")]
+    [SerializeField] private int[] enemiesPerStage = new int[] { 5, 7, 9 };
+
+    /// <summary>
+    /// 현재(또는 마지막으로 시작한) 스테이지 인덱스. 0부터 시작.
+    /// UI나 로깅에서 참조할 수 있도록 공개(Get 전용).
+    /// </summary>
+    public int ActiveStage { get; private set; } = 0;
+
+    public void Init(GameManager gm)
     {
-        this.gameManager = gameManager;
+        gameManager = gm;
+        // 자식이 비활성일 수도 있으니 true 사용
+        enemyManager = (gameManager != null) ? gameManager.GetComponentInChildren<EnemyManager>(true) : null;
+        if (enemyManager == null)
+            enemyManager = FindAnyObjectByType<EnemyManager>();
     }
 
-    public void StartStage(int stageCount)
+    public void StartStage(int stageCountOrIndex)
     {
-        foreach (StageController stage in stages)
+        if (gameManager == null)
         {
-            stage.gameObject.SetActive(false);
+            Debug.LogError("[StageManager] Init이 먼저 호출되지 않았습니다.");
+            return;
+        }
+        if (enemyManager == null)
+        {
+            enemyManager = gameManager.GetComponentInChildren<EnemyManager>(true);
+            if (enemyManager == null)
+            {
+                Debug.LogError("[StageManager] EnemyManager를 찾을 수 없습니다.");
+                return;
+            }
         }
 
-        if (stageCount == 1)
+        int enemyCount;
+
+        // enemiesPerStage가 설정되어 있고, 인덱스 범위 안이면 "인덱스"로 해석
+        bool treatAsIndex =
+            enemiesPerStage != null &&
+            enemiesPerStage.Length > 0 &&
+            stageCountOrIndex >= 0 &&
+            stageCountOrIndex < enemiesPerStage.Length;
+
+        if (treatAsIndex)
         {
-            gameManager.stageIndex = Random.Range(0, 3);
-        }
-        else if (stageCount == 2)
-        {
-            gameManager.stageIndex = Random.Range(3, 5);
+            ActiveStage = stageCountOrIndex;                 // 현재 스테이지 인덱스 기록
+            enemyCount = Mathf.Max(1, enemiesPerStage[ActiveStage]);
         }
         else
         {
-            gameManager.stageIndex = 5;
+            // 범위를 벗어나면 "그 값 자체를 적 수량"으로 해석
+            enemyCount = Mathf.Max(1, stageCountOrIndex);
+            // 인자로 '수량'이 들어온 경우엔 ActiveStage를 변경하지 않음 (GameManager가 관리)
         }
 
-        ActiveStage = stages[gameManager.stageIndex];
-        ActiveStage.gameObject.SetActive(true);
+        enemyManager.StartStage(enemyCount);
+    }
+
+    public void EndOfStage()
+    {
+        gameManager?.EndOfStage();
     }
 }
