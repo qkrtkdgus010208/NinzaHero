@@ -30,6 +30,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private bool verboseLogs = true;
 
     public List<EnemyController> activeEnemies = new List<EnemyController>();
+    public BossController boss;
     private bool enemySpawnComplite;
     private GameManager gameManager;
 
