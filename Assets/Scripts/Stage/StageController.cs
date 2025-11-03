@@ -18,7 +18,7 @@ public class StageController : MonoBehaviour
     // TODO:: 몬스터 스폰 정도 수정 필요
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] List<int> spawnCount;
-
+    public PolygonCollider2D polygonCollider;
 
     public Transform GetRandomSpawnPoint()
     {

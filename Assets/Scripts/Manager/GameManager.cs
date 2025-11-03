@@ -62,7 +62,7 @@ public class GameManager : Singleton<GameManager>
         player.transform.position = new Vector3(0f, -7f, 0f);
         stageManager.StartStage();
 
-        cameraConfinerSetter.SetConfinerBoundingShape();
+        cameraConfinerSetter.SetConfinerBoundingShape(stageManager.ActiveStageController.polygonCollider);
     }
 
     public void EndOfStage()
