@@ -50,13 +50,12 @@ public class PlayerController : BaseController
         if (target == null)
         {
             lookDirection = Vector2.zero;
+            isAttacking = false;
             return;
         }
 
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
-
-        isAttacking = false;
 
         lookDirection = direction;
 
