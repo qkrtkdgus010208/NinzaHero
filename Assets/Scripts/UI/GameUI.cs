@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class GameUI : MonoBehaviour
+public class GameUI : BaseUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  [SerializeField] private TextMeshProUGUI waveText;
+  [SerializeField] private SliderJoint2D hpSlider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  protected override UIState GetUIState()
+  {
+    return UIState.Game;
+  }
 }
