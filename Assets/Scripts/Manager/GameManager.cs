@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     //public BossController boss { get; private set; }
 
     private EnemyManager enemyManager;
-    private StageManager stageManager;
+   
     private UIManager uiManager;
     public EnemyManager EnemyManager { get { return enemyManager; } }
 
@@ -76,7 +76,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        enemyManager.StopStage();
+        
         uiManager.ShowGameOver();
     }
 }
