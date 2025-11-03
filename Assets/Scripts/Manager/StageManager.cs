@@ -5,6 +5,8 @@ public class StageManager : MonoBehaviour
     private GameManager gameManager;
     private EnemyManager enemyManager;
 
+    [SerializeField] private StageController[] stages;
+
     [Header("Stage Config")]
     [Tooltip("스테이지별 적 수(인덱스로 접근). 비워두면 StartStage 인자를 '수량'으로 해석합니다.")]
     [SerializeField] private int[] enemiesPerStage = new int[] { 5, 7, 9 };
@@ -13,7 +15,10 @@ public class StageManager : MonoBehaviour
     /// 현재(또는 마지막으로 시작한) 스테이지 인덱스. 0부터 시작.
     /// UI나 로깅에서 참조할 수 있도록 공개(Get 전용).
     /// </summary>
+    /// 
     public int ActiveStage { get; private set; } = 0;
+
+    public StageController ActiveStage2 { get; private set; }
 
     public void Init(GameManager gm)
     {
@@ -26,6 +31,27 @@ public class StageManager : MonoBehaviour
 
     public void StartStage(int stageCountOrIndex)
     {
+        foreach (StageController stage in stages)
+        {
+            stage.gameObject.SetActive(false);
+        }
+
+        if (stageCountOrIndex == 1)
+        {
+            gameManager.stageIndex = Random.Range(0, 3);
+        }
+        else if (stageCountOrIndex == 2)
+        {
+            gameManager.stageIndex = Random.Range(3, 5);
+        }
+        else
+        {
+            gameManager.stageIndex = 5;
+        }
+
+        ActiveStage2 = stages[gameManager.stageIndex];
+        ActiveStage2.gameObject.SetActive(true);
+
         if (gameManager == null)
         {
             Debug.LogError("[StageManager] Init이 먼저 호출되지 않았습니다.");
