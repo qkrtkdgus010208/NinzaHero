@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public EnemyManager EnemyManager { get { return enemyManager; } }
 
     private StageManager stageManager;
+    public StageManager StageManager { get { return stageManager; } }
 
     public int stageIndex = 0;
 
@@ -22,10 +23,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this);
-
         stageManager = GetComponentInChildren<StageManager>();
+
+
+        enemyManager.Init(this);
         stageManager.Init(this);
+
+
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);

@@ -60,8 +60,8 @@ public class EnemyController : BaseController
 
     public override void Death()
     {
+        enemyManager.DeathOfEnemy(this);
         base.Death();
-        enemyManager.RemoveEnemyOnDeath(this);
     }
 
 

@@ -49,7 +49,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            Stop();
+            lookDirection = Vector2.zero;
             return;
         }
 
@@ -75,12 +75,6 @@ public class PlayerController : BaseController
         }
     }
 
-    private void Stop()
-    {
-        lookDirection = Vector3.zero;
-        movementDirection = Vector3.zero;
-    }
-
     private float DistanceToTarget()
     {
         return Vector3.Distance(transform.position, target.position);
@@ -100,5 +94,10 @@ public class PlayerController : BaseController
     {
         base.Death();
         gameManager.GameOver();
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 }

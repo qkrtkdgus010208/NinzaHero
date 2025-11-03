@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
@@ -26,12 +28,32 @@ public class StageManager : MonoBehaviour
     {
         ActiveStageController = stageControllers[ActiveStage];
 
+        gameManager.player.SetPosition(Vector3.zero);
+
         ActiveStageController.SetActive(true);
         ActiveStageController.StartPhase(this, gameManager, enemyManager);
     }
 
-    public void EndOfStage()
+    public void DeathOfEnemy(EnemyController enemy)
     {
-        gameManager?.EndOfStage();
+        ActiveStageController.IsOver();
+    }
+
+    private void NextStage()
+    {
+        ActiveStageController.SetActive(false);
+
+        ActiveStage += 1;
+        StartStage();
+    }
+
+    internal bool OnExit()
+    {
+        if(ActiveStageController.IsClear)
+        {
+            NextStage();
+            return true;
+        }
+        return false;
     }
 }
