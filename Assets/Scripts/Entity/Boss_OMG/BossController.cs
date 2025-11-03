@@ -25,7 +25,7 @@ public class BossController : MonoBehaviour
     private Vector2 direction;
 
     private int phase;
-    private float delay = 2.0f;
+    private float delay = 4.0f;
     private float time;
 
     private bool attacking = true;
@@ -151,5 +151,9 @@ public class BossController : MonoBehaviour
     private void DragonHasFallen()
     {
         Destroy(this.gameObject);
+    }
+    public void Damaged(int damage)
+    {
+        this.hp -= damage;
     }
 }
