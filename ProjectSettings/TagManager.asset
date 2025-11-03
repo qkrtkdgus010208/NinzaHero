@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Monster
+  - Ball
+  - Projectile
+  - Undefined
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - Enemy
   - Level
   - Charaters
-  - 
+  - Boss
   - 
   - 
   - 
