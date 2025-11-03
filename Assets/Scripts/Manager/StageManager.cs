@@ -28,8 +28,6 @@ public class StageManager : MonoBehaviour
     {
         ActiveStageController = stageControllers[ActiveStage];
 
-        gameManager.player.SetPosition(Vector3.zero);
-
         ActiveStageController.SetActive(true);
         ActiveStageController.StartPhase(this, gameManager, enemyManager);
     }
