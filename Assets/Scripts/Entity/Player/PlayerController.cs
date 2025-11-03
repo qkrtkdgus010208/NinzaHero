@@ -49,7 +49,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-
+            Stop();
             return;
         }
 
@@ -73,6 +73,12 @@ public class PlayerController : BaseController
 
             return;
         }
+    }
+
+    private void Stop()
+    {
+        lookDirection = Vector3.zero;
+        movementDirection = Vector3.zero;
     }
 
     private float DistanceToTarget()

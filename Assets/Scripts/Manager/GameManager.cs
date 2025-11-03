@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     //public BossController boss { get; private set; }
 
     private EnemyManager enemyManager;
+    public EnemyManager EnemyManager { get { return enemyManager; } }
+
     private StageManager stageManager;
 
-    [SerializeField] private int currentStageIndex = 0; // 1층, 2층, 3층
-    public int stageIndex; // 1층 : 0, 1, 2 / 2층 : 3, 4 / 3층 : 5
+    public int stageIndex = 0;
 
     public static bool isFirstLoading = true;
 
@@ -23,11 +24,11 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-        stageManager = GetComponentInChildren<StageManager>();
-        stageManager.Init(this);
-
         enemyManager = GetComponentInChildren<EnemyManager>();
         enemyManager.Init(this);
+
+        stageManager = GetComponentInChildren<StageManager>();
+        stageManager.Init(this);
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
@@ -58,20 +59,18 @@ public class GameManager : MonoBehaviour
     private void StartNextStage()
     {
         player.transform.position = new Vector3(0f, -7f, 0f);
-        currentStageIndex += 1;
-        enemyManager.StartStage(1 + currentStageIndex);
-        stageManager.StartStage(currentStageIndex);
+        stageManager.StartStage();
 
         cameraConfinerSetter.SetConfinerBoundingShape();
     }
 
     public void EndOfStage()
     {
-        StartNextStage();
+       // StartNextStage();
     }
 
     public void GameOver()
     {
-        enemyManager.StopStage();
+
     }
 }
