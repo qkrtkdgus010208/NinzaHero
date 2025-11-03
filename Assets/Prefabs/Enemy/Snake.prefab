@@ -212,8 +212,8 @@ MonoBehaviour:
   attackRange: 5
   target:
     serializedVersion: 2
-    m_Bits: 320
-  isOnKnockback: 1
+    m_Bits: 64
+  isOnKnockback: 0
   knockbackPower: 1
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 3524132278741500974}
