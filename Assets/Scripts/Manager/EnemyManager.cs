@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Spawn Mix (when name not matched)")]
     [Range(0f, 1f)]
-    [SerializeField] private float meleeSpawnRatio = 0.5f; // 이름 매칭 안될 때만 사용
+    [SerializeField] private float meleeSpawnRatio = 0.5f;
 
     [Header("Visibility Safeguards")]
     [SerializeField] private bool forceVisibilityFix = true;
@@ -52,8 +52,6 @@ public class EnemyManager : MonoBehaviour
     private IEnumerator SpawnStage(int stageCount)
     {
         enemySpawnComplite = false;
-
-        // 요청: 스폰 수를 절반으로 → 비율로 스케일링
         int spawnTotal = Mathf.Max(1, Mathf.RoundToInt(stageCount * Mathf.Max(0f, spawnCountScale)));
 
         yield return new WaitForSeconds(1f);
@@ -109,14 +107,11 @@ public class EnemyManager : MonoBehaviour
             Debug.LogError($"{logTag} EnemyController 없음: {prefab.name}");
             return;
         }
-
-        // === 타입 자동 설정 (프리팹 이름으로 분기) ===
         var wh = go.GetComponent<WeaponHandler>();
         string nameLow = prefab.name.ToLower();
 
         if (nameLow.Contains("heart"))
         {
-            // Heart = 돌진만
             SafeConfigureCharger(ec, true);
             SafeConfigureContact(ec, false);
             SafeConfigureChaseOnly(ec, false);
@@ -124,7 +119,6 @@ public class EnemyManager : MonoBehaviour
         }
         else if (nameLow.Contains("mushroom"))
         {
-            // Mushroom = 추격만
             SafeConfigureCharger(ec, false);
             SafeConfigureContact(ec, false);
             SafeConfigureChaseOnly(ec, true);
@@ -132,7 +126,6 @@ public class EnemyManager : MonoBehaviour
         }
         else if (nameLow.Contains("snake"))
         {
-            // Snake = 원거리만
             SafeConfigureCharger(ec, false);
             SafeConfigureContact(ec, false);
             SafeConfigureChaseOnly(ec, false);
@@ -140,7 +133,6 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            // 기타 이름: 원거리/근접 섞기(원하면 사용)
             bool spawnAsMelee = Random.value < meleeSpawnRatio;
             SafeConfigureCharger(ec, false);
             SafeConfigureContact(ec, spawnAsMelee);
@@ -148,7 +140,6 @@ public class EnemyManager : MonoBehaviour
             if (wh != null) wh.enabled = !spawnAsMelee;
         }
 
-        // 타깃/매니저 주입
         if (gameManager == null || gameManager.player == null)
         {
             Debug.LogError($"{logTag} gameManager.player가 없습니다.");
@@ -158,11 +149,9 @@ public class EnemyManager : MonoBehaviour
         ec.Init(this, gameManager.player.transform);
         activeEnemies.Add(ec);
 
-        // 가시성 보정(정렬/알파/Z/스케일)
         if (forceVisibilityFix) ApplyVisibilityFix(go, logTag);
     }
 
-    // ===== 안전 호출(구버전 EnemyController라도 크래시 없이 무시) =====
     private void SafeConfigureContact(EnemyController ec, bool enable)
     {
         try { ec.ConfigureContactAttack(enable); } catch { if (verboseLogs) Debug.Log("[EnemyManager] ConfigureContactAttack API 없음(무시)."); }
@@ -176,15 +165,12 @@ public class EnemyManager : MonoBehaviour
         try { ec.ConfigureChaseOnly(enable); } catch { if (verboseLogs) Debug.Log("[EnemyManager] ConfigureChaseOnly API 없음(무시)."); }
     }
 
-    // ===== 가시성 보정 =====
     private void ApplyVisibilityFix(GameObject go, string logTag)
     {
-        // 위치 Z=0, 스케일=1
         var p = go.transform.position;
         go.transform.position = new Vector3(p.x, p.y, 0f);
         go.transform.localScale = Vector3.one;
 
-        // 모든 SpriteRenderer 보이게 + 레이어/오더 상향 + 알파=1
         var srs = go.GetComponentsInChildren<SpriteRenderer>(true);
         foreach (var sr in srs)
         {
@@ -197,7 +183,6 @@ public class EnemyManager : MonoBehaviour
             sr.sortingOrder = Mathf.Max(sr.sortingOrder, characterSortingOrder);
         }
 
-        // SortingGroup도 보정
         var sg = go.GetComponentInChildren<SortingGroup>(true);
         if (sg != null)
         {
@@ -205,14 +190,6 @@ public class EnemyManager : MonoBehaviour
             if (!string.IsNullOrEmpty(characterSortingLayerName))
                 sg.sortingLayerName = characterSortingLayerName;
             sg.sortingOrder = Mathf.Max(sg.sortingOrder, characterSortingOrder);
-        }
-
-        // 화면 안에 있는지 로그
-        var cam = Camera.main;
-        if (cam != null && verboseLogs)
-        {
-            var vp = cam.WorldToViewportPoint(go.transform.position);
-            Debug.Log($"{logTag} Viewport {vp}");
         }
     }
 
