@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500
-  speed: 13.81
+  speed: 3
 --- !u!114 &5157777933578794931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,10 +315,10 @@ MonoBehaviour:
   delay: 1
   power: 100
   speed: 10
-  attackRange: 30
+  attackRange: 10
   target:
     serializedVersion: 2
-    m_Bits: 1408
+    m_Bits: 384
   isOnKnockback: 1
   knockbackPower: 1
   knockbackTime: 0.1

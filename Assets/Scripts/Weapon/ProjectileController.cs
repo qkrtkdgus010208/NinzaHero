@@ -5,7 +5,6 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private LayerMask levelCollisionLayer;
-    [SerializeField] private LayerMask bossCollisionLayer;
 
     private Rigidbody2D rigid;
     private ProjectileManager projectileManager;
@@ -41,22 +40,9 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log( "layer : "+ collision.gameObject.layer);
-
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
             DestroyProjectile();
-        }
-        else if(bossCollisionLayer.value == (bossCollisionLayer.value | (1 << collision.gameObject.layer)))
-        {
-            Debug.Log("공격감지");
-
-            BossController bossHp = collision.GetComponent<BossController>();
-
-            if (bossHp != null)
-            {
-                bossHp.Damaged(100);
-            }
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {

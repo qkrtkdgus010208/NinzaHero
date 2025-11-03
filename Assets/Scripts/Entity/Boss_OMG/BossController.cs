@@ -14,14 +14,14 @@ public class BossController : MonoBehaviour
     }
 
     public bool ignorePhase;
-    public bool isActive;
 
     [SerializeField] private Transform energyBallSpawn;
     [SerializeField] private GameObject tail;
     [SerializeField] private GameObject born;
-    
+    [SerializeField] private LayerMask PlayerCollisionLayer;
 
     private Animator animator;
+    private CapsuleCollider2D area;
     private Vector2 direction;
 
     private int phase;
@@ -30,16 +30,17 @@ public class BossController : MonoBehaviour
 
     private bool attacking = true;
     private bool attackable = false;
-    public bool isAlive = true;
+    private bool isAlive = true;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        area = GetComponentInChildren<CapsuleCollider2D>();
     }
 
     private void Start()
     {
-        isActive = true;   
+        
     }
 
 
@@ -124,22 +125,25 @@ public class BossController : MonoBehaviour
         }
     }
 
-    public void Damaged(int damage)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        hp -= damage;
-
-        Debug.Log(hp);
-
-        if (hp <= 0) isAlive = false;
+        if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
+        {
+            attackable = true;
+            UpdateTargetPos(collision.gameObject.transform);
+            Debug.Log(attackable);
+        }
     }
-    public void Detected(bool onTarget, Transform pos)
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (pos == null) return;
-        attackable = onTarget;
-
-        UpdateTargetPos(pos);
+        if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
+        {
+            attackable = false;
+            Debug.Log(attackable);
+        }
     }
-    public void UpdateTargetPos(Transform pos)
+    private void UpdateTargetPos(Transform pos)
     {
         target = pos.position;
     }
@@ -147,5 +151,9 @@ public class BossController : MonoBehaviour
     private void DragonHasFallen()
     {
         Destroy(this.gameObject);
+    }
+    public void Damaged(int damage)
+    {
+        this.hp -= damage;
     }
 }

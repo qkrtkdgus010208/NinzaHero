@@ -6,14 +6,8 @@ public class PlayerController : BaseController
 {
     private GameManager gameManager;
     private EnemyManager enemyManager;
-    private BossController boss;
     private Transform target;
 
-
-    private void Start()
-    {
-        boss = FindAnyObjectByType<BossController>();
-    }
     public void Init(GameManager gameManager, EnemyManager enemyManager)
     {
         this.gameManager = gameManager;
@@ -55,22 +49,8 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            if(boss.isActive)
-            {
-                if(boss.isAlive)
-                {
-                    target = boss.transform;
-                }
-                else
-                {
-                    return;
-                }    
-                
-            }
-            else
-            {
-                return;
-            }
+
+            return;
         }
 
         float distance = DistanceToTarget();
