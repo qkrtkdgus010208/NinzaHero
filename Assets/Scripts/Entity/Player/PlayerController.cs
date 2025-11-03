@@ -61,13 +61,13 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
+            lookDirection = Vector2.zero;
+            isAttacking = false;
             return;
         }
 
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
-
-        isAttacking = false;
 
         lookDirection = direction;
 
@@ -105,5 +105,10 @@ public class PlayerController : BaseController
     {
         base.Death();
         gameManager.GameOver();
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 }

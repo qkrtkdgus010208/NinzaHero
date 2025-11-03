@@ -16,6 +16,13 @@ public class Skill : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textName;
     [SerializeField] private TextMeshProUGUI textDesc;
 
+    private Button button;
+
+    private void Awake()
+    {
+        button = GetComponent<Button>();
+    }
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -30,7 +37,14 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
+        button.onClick.AddListener(OnClick);
+
         textLevel.text = $"Lv.{level + 1}";
+    }
+
+    private void OnDisable()
+    {
+        button.onClick.RemoveAllListeners();
     }
 
     public void OnClick()
@@ -41,7 +55,7 @@ public class Skill : MonoBehaviour
                 statHadler.Speed = data.upgradeStats[level];
                 break;
             case SkillData.SkillType.AttackSpeed:
-                rangeWeaponHandler.Speed = data.upgradeStats[level];
+                rangeWeaponHandler.Delay = data.upgradeStats[level];
                 break;
             case SkillData.SkillType.Power:
                 rangeWeaponHandler.Power = data.upgradeStats[level];

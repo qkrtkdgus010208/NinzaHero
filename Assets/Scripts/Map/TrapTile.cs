@@ -7,19 +7,15 @@ using UnityEngine.Tilemaps;
 
 public class TrapTile : MonoBehaviour
 {
-    ResourceController resourceController;
+    ResourceController resourceController; 
 
     [SerializeField] int Trapdamage = 50;       //트랩 데미지
-    [SerializeField] float hitCooldown = 0.5f;  //적중 후 다음 적중 쿨타임 0.5초
+    [SerializeField] float hitCooldown = 0.3f;  //적중 후 다음 적중 쿨타임 0.3초
     float lastHitTime = -999f; //최초 트랩 접촉 시 데미지 바로 받게끔 값 할당
 
     float trapKnockbackPower = 1.5f;
     float trapKnockbackTime = 0.4f;
 
-    private void Start()
-    {
-        resourceController = FindAnyObjectByType<ResourceController>();
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         TryHit(other);
@@ -46,40 +42,28 @@ public class TrapTile : MonoBehaviour
         TryHit(other);
     }
 
-    //문제점 : 가만히 서 있으면 작동 안 함. 무조건 움직여야 데미지 적용. 넉백로직을 적용할지 고민
-
 
     void TryHit(Collider2D other)
     {
-        var statHandler = other.GetComponent<StatHandler>();  //플레이어 체력 가져옴
+        var resourceController = other.GetComponent<ResourceController>();  //플레이어 체력 가져옴
 
         if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
         if (Time.time - lastHitTime < hitCooldown) return;
 
         lastHitTime = Time.time;
-        // 플레이어 오브젝트에서 StatHandler 컴포넌트를 찾음
 
-        if (statHandler == null)
+        if (resourceController == null)
         {
             // 혹시 콜라이더가 자식에 있을 수도 있으니까 부모에서도 탐색
-            statHandler = other.GetComponentInParent<StatHandler>();
+            resourceController = other.GetComponentInParent<ResourceController>();
             Debug.LogError("Player 체력 null");
-        }
-
-        if (statHandler != null)
-        {
-            resourceController.ChangeHealth(Trapdamage); //데미지 받는 함수가 따로 있다면 대체
-
-            Debug.Log($"함정 발동, 플레이어 체력: {statHandler.Health}");
         }
 
         if (resourceController != null)
         {
             resourceController.ChangeHealth(-Trapdamage);
-
-
-            
-            Debug.Log($"함정 발동, 플레이어 체력: {statHandler.Health}");
+        
+            Debug.Log($"함정 발동, 플레이어 체력: {resourceController.CurrentHealth}");
         }
     }
 }

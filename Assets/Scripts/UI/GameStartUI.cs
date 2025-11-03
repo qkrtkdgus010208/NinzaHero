@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GameStartUI : MonoBehaviour
 {
   [SerializeField] private GameObject Cloud;
@@ -14,9 +15,13 @@ public class GameStartUI : MonoBehaviour
   [Range(0f, 1f)][SerializeField] private float Speed = 0.7f;
 
   [SerializeField] private Button StartButton;
-   private AudioSource buttonAudio; 
+   public AudioSource buttonAudio; 
 
-  private SpriteRenderer LightSpriteRenderer_1;
+  public AudioClip Accept5;
+
+  private SpriteRenderer raylight_0;
+  private SpriteRenderer raylight_1;
+  private SpriteRenderer raylight_2;
 
   [SerializeField] private float ResetX = -8.46f;
   [SerializeField] private float StartX = 8.32f;
@@ -27,9 +32,12 @@ public class GameStartUI : MonoBehaviour
   private void Awake()
   {
 	Cloud.transform.localPosition = new Vector3(0.95f,3.22f,0f);
-    LightSpriteRenderer_1 = RayLight_0.GetComponent<SpriteRenderer>();
+    raylight_0 = RayLight_0.GetComponent<SpriteRenderer>();
+	raylight_1 = RayLight_1.GetComponent<SpriteRenderer>();
+	raylight_2 = RayLight_2.GetComponent<SpriteRenderer>();
+
 	StartButton.onClick.AddListener(OnClickStartButton);
-    buttonAudio = StartButton.GetComponent<AudioSource>();
+    
   }
 
   // Start is called before the first frame update
@@ -42,8 +50,11 @@ public class GameStartUI : MonoBehaviour
     void Update()
     {
 	CloudMove();
+    raylightMoving(raylight_0);
+	raylightMoving(raylight_1);
+	raylightMoving(raylight_2);
 
-	}
+  }
 
 
 
@@ -60,19 +71,44 @@ public class GameStartUI : MonoBehaviour
     }
   }
 
+  void raylightMoving(SpriteRenderer i)
+  {
+    Color j = i.color;
+    float speed = 0.1f;
+
+	if (j.a == 1 || j.a > 0.5)
+	{
+	  j.a -= 1 * speed;
+	}
+
+	else if ( j.a <= 0.5)
+    {
+	  j.a+= 1 * speed;
+	}
+    
+    
+
+    i.color = j;  
+
+  }
 
 
 
 public void OnClickStartButton()
   {
 
-    if( buttonAudio != null)
-      buttonAudio.Play();
-    SceneManager.LoadScene("GameScene");
-	GameManager.Instance.StartGame();
+    buttonAudio.PlayOneShot(Accept5);
+
+  StartCoroutine(wait());
+
+    
   }
 
-
+  IEnumerator wait()
+  {
+    yield return new WaitForSeconds(1f);
+	SceneManager.LoadScene("GameScene");
+  }
 
 
 

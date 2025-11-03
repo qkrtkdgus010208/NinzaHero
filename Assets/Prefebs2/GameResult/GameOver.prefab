@@ -858,6 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main: {fileID: 2602652429416513468}
   Restart: {fileID: 8221276955897006751}
+  GameOverPanel: {fileID: 7469759962716026575}
 --- !u!1 &8417327144029412420
 GameObject:
   m_ObjectHideFlags: 0
