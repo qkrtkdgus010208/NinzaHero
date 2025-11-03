@@ -68,6 +68,12 @@ public class BaseController : MonoBehaviour
         knockback = -(other.position - transform.position).normalized * power;
     }
 
+    public void ApplyTrapKnockback(Vector2 direction, float power, float duration)
+    {
+        knockbackDuration = duration;
+        knockback = direction * power;
+    }
+
     private void HandleAttackDelay()
     {
         if (weaponHandler == null)
