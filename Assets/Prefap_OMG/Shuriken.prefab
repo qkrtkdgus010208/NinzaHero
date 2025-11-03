@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8904765876502751278}
   - component: {fileID: 3465387976734558665}
   - component: {fileID: 8739366929704802036}
-  - component: {fileID: -1834575145507723239}
   - component: {fileID: 2349062410489084970}
+  - component: {fileID: 247972316785525196}
   m_Layer: 0
   m_Name: Shuriken
   m_TagString: Untagged
@@ -123,19 +123,6 @@ CircleCollider2D:
   m_Offset: {x: 0.0011889266, y: -0.0000041500757}
   serializedVersion: 2
   m_Radius: 0.06489402
---- !u!114 &-1834575145507723239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3364276394901954228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 620c32425f867754b87cdc4965a4041d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: 0, z: 0}
 --- !u!50 &2349062410489084970
 Rigidbody2D:
   serializedVersion: 4
@@ -163,6 +150,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &247972316785525196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364276394901954228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f2e574fb2d1f3499ba0dc739f18cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelCollisionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  bossCollisionLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &6997566517878754777
 GameObject:
   m_ObjectHideFlags: 0

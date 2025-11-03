@@ -49,7 +49,7 @@ public class StageManager : MonoBehaviour
             gameManager.stageIndex = 5;
         }
 
-        ActiveStage2 = stages[gameManager.stageIndex];
+        ActiveStage2 = stages[5];
         ActiveStage2.gameObject.SetActive(true);
 
         if (gameManager == null)

@@ -4,16 +4,14 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : BaseController
 {
+    private static readonly float BOSS_POS_ADJUST = 20f;
+
+    [SerializeField] BossController boss;
+    
     private GameManager gameManager;
     private EnemyManager enemyManager;
-    private BossController boss;
     private Transform target;
 
-
-    private void Start()
-    {
-        boss = FindAnyObjectByType<BossController>();
-    }
     public void Init(GameManager gameManager, EnemyManager enemyManager)
     {
         this.gameManager = gameManager;
@@ -27,7 +25,15 @@ public class PlayerController : BaseController
 
         if (enemyManager == null || enemyManager.activeEnemies == null || enemyManager.activeEnemies.Count == 0)
         {
-            return null;
+            if (boss == null) return null;
+            if(boss.isAlive && boss.isActive)
+            {
+                return boss.thisPos;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         foreach (var enemy in enemyManager.activeEnemies)
@@ -55,22 +61,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            if(boss.isActive)
-            {
-                if(boss.isAlive)
-                {
-                    target = boss.transform;
-                }
-                else
-                {
-                    return;
-                }    
-                
-            }
-            else
-            {
-                return;
-            }
+            return;
         }
 
         float distance = DistanceToTarget();

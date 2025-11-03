@@ -26,6 +26,8 @@ public class ResourceController : MonoBehaviour
 
     public bool ChangeHealth(float change)
     {
+        if (baseController.godMode) return false;
+
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;

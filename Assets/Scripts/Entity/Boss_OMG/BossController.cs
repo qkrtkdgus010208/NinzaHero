@@ -14,8 +14,9 @@ public class BossController : MonoBehaviour
     }
 
     public bool ignorePhase;
-    public bool isActive;
+    public bool isActive = true;
 
+    [SerializeField] public Transform thisPos;
     [SerializeField] private Transform energyBallSpawn;
     [SerializeField] private GameObject tail;
     [SerializeField] private GameObject born;
@@ -41,7 +42,6 @@ public class BossController : MonoBehaviour
     {
         isActive = true;   
     }
-
 
     Vector3 target;
     public void Init(Transform target)
@@ -146,6 +146,7 @@ public class BossController : MonoBehaviour
 
     private void DragonHasFallen()
     {
+        isActive = false;
         Destroy(this.gameObject);
     }
 }

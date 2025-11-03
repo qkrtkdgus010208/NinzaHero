@@ -20,6 +20,8 @@ public class BaseController : MonoBehaviour
     private float timeSinceLastAttack = float.MaxValue;
     protected bool isAttacking;
 
+    public bool godMode;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

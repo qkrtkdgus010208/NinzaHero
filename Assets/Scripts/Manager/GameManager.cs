@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController player { get; private set; }
     private ResourceController playerResourceController;
-    public BossController boss { get; private set; }
+    [SerializeField] private BossController boss;
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
@@ -32,8 +32,7 @@ public class GameManager : MonoBehaviour
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
 
-        boss = FindAnyObjectByType<BossController>();
-        boss.Init(player.transform);
+        if (boss != null) boss.Init(player.transform);
     }
 
     private void Start()
@@ -67,7 +66,18 @@ public class GameManager : MonoBehaviour
 
     public void EndOfStage()
     {
-        if(!boss.isActive)
+        if (boss != null)
+        {
+            if (!boss.isActive)
+            {
+                StartNextStage();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
         {
             StartNextStage();
         }

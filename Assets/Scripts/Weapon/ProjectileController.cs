@@ -43,11 +43,7 @@ public class ProjectileController : MonoBehaviour
     {
         Debug.Log( "layer : "+ collision.gameObject.layer);
 
-        if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
-        {
-            DestroyProjectile();
-        }
-        else if(bossCollisionLayer.value == (bossCollisionLayer.value | (1 << collision.gameObject.layer)))
+        if (collision.gameObject.CompareTag("Boss"))
         {
             Debug.Log("공격감지");
 
@@ -74,6 +70,10 @@ public class ProjectileController : MonoBehaviour
                 }
             }
 
+            DestroyProjectile();
+        }
+        else if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
+        {
             DestroyProjectile();
         }
     }
