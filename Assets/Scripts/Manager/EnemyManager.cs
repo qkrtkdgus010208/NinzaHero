@@ -12,26 +12,38 @@ public class EnemyManager : MonoBehaviour
 
     public List<EnemyController> activeEnemies = new List<EnemyController>();
     private GameManager gameManager;
+    private StageManager stageManager;
 
-    public void Init(GameManager gameManager) => this.gameManager = gameManager;
-
-    public void RandomSpawn(StageController stageController)
+    public void Init(GameManager gameManager)
     {
-        // 지금은 랜덤
-        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        this.gameManager = gameManager;
+        stageManager = gameManager.StageManager;
+    }
 
-        Transform point = stageController.GetRandomSpawnPoint();
+    public void Spawn(StageController stageController, GameObject prefab, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Transform point = stageController.GetRandomSpawnPoint();
 
-        Vector3 pos = point.position;
-        GameObject go = Instantiate(prefab, pos, Quaternion.identity);
-        var ec = go.GetComponent<EnemyController>();
-        ec.Init(this, gameManager);
-        activeEnemies.Add(ec);
+            Vector3 pos = point.position;
+            GameObject go = Instantiate(prefab, pos, Quaternion.identity);
+            var ec = go.GetComponent<EnemyController>();
+            ec.Init(this, gameManager);
+            activeEnemies.Add(ec);
+        }
     }
 
 
-    public void RemoveEnemyOnDeath(EnemyController enemy)
+    public void DeathOfEnemy(EnemyController enemy)
     {
+        // 몬스터 죽음 통보
         activeEnemies.Remove(enemy);
+        stageManager.DeathOfEnemy(enemy);
+    }
+
+    public bool IsEmpty()
+    {
+        return activeEnemies.Count == 0;
     }
 }
