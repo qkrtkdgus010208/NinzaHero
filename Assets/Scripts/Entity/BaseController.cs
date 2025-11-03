@@ -82,6 +82,7 @@ public class BaseController : MonoBehaviour
         {
             timeSinceLastAttack = 0;
             Attack();
+            animationHandler.Attack(lookDirection);
         }
     }
 
