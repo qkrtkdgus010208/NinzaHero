@@ -1940,6 +1940,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 191928854571958452, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stageIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 191928854571958452, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
       propertyPath: cameraConfinerSetter
       value: 
       objectReference: {fileID: 1651621203}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8387614549538219123}
   - component: {fileID: 9142242561429248273}
   - component: {fileID: 5044473981223738068}
-  - component: {fileID: 8177647883887469123}
+  - component: {fileID: 4761247938703865101}
   m_Layer: 7
   m_Name: Mushroom
   m_TagString: Untagged
@@ -125,17 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followRange: 15
-  chaseOnly: 0
-  useContactAttack: 1
-  contactDamage: 10
-  contactCooldown: 0.5
-  contactRange: 0.6
-  contactUseKnockback: 1
-  contactKnockbackPower: 4
-  contactKnockbackTime: 0.12
-  useCharger: 0
-  chargeWindup: 0.5
-  chargeSpeed: 12
 --- !u!114 &8387614549538219123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,35 +163,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255564a400ecedf4f9324755eb2f8019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8177647883887469123
+--- !u!114 &4761247938703865101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6329761097385117548}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87480aeb0f2865d4f886ac38e1488803, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f31750e9eed175459b26db052744415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2
-  power: 100
-  speed: 5
-  attackRange: 5
+  delay: 1
+  power: 1
+  speed: 1
+  attackRange: 1
   target:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 64
   isOnKnockback: 1
-  knockbackPower: 1
+  knockbackPower: 4
   knockbackTime: 0.1
-  projectileSpawnPosition: {fileID: 2586518038113706690}
-  bulletIndex: 1
-  bulletSize: 0.75
-  duration: 3
-  spread: 0
-  numberofProjectilesPerShot: 1
-  multipleProjectilesAngel: 0
 --- !u!1 &7054645485301118091
 GameObject:
   m_ObjectHideFlags: 0
