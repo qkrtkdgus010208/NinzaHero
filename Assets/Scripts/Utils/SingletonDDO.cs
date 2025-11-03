@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class SingletonDDO<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T Instance { get; private set; }
 
@@ -9,6 +9,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         if (Instance == null)
         {
             Instance = this as T;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
