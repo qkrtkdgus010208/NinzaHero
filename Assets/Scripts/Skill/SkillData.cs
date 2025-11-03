@@ -1,19 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum SkillType { MoveSpeed, AttackSpeed, Power, Range, Count, Heal }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("# Main Info")]
+    public SkillType skillType;
+    public int skillId;
+    public string skillName;
+    [TextArea]
+    public string skillDesc;
+    public Sprite skillIcon;
+
+    [Header("# Level Data")]
+    public float baseStat;
+    public float[] upgradeStats;
 }

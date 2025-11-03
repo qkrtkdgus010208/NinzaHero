@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController player { get; private set; }
     private ResourceController playerResourceController;
+    //public BossController boss { get; private set; }
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
@@ -26,10 +27,13 @@ public class GameManager : MonoBehaviour
         stageManager.Init(this);
 
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this, stageManager);
+        enemyManager.Init(this);
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
+
+        //boss = FindAnyObjectByType<BossController>();
+        //boss.Init(player.transform);
     }
 
     private void Start()

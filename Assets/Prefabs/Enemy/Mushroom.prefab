@@ -96,7 +96,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -125,6 +125,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followRange: 15
+  chaseOnly: 0
+  useContactAttack: 1
+  contactDamage: 10
+  contactCooldown: 0.5
+  contactRange: 0.6
+  contactUseKnockback: 1
+  contactKnockbackPower: 4
+  contactKnockbackTime: 0.12
+  useCharger: 0
+  chargeWindup: 0.5
+  chargeSpeed: 12
 --- !u!114 &8387614549538219123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500
-  speed: 1
+  speed: 2
 --- !u!114 &5044473981223738068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +181,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6329761097385117548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87480aeb0f2865d4f886ac38e1488803, type: 3}
   m_Name: 
@@ -187,7 +198,7 @@ MonoBehaviour:
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 2586518038113706690}
   bulletIndex: 1
-  bulletSize: 1
+  bulletSize: 0.75
   duration: 3
   spread: 0
   numberofProjectilesPerShot: 1

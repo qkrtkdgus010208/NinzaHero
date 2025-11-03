@@ -52,7 +52,7 @@ public class PlayerController : BaseController
 
             return;
         }
-        
+
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
 
