@@ -4177,7 +4177,7 @@ MonoBehaviour:
   - {fileID: 808375739734433798}
   - {fileID: 7882377291152051823}
   SkillSprite:
-  - {fileID: 21300000, guid: a69fcf0799048334b95f3016df341f67, type: 3}
+  - {fileID: 0}
   - {fileID: 21300000, guid: 98e6c29e485b39d42b440060ca37d3f8, type: 3}
   - {fileID: 21300000, guid: 903b5b9dfc81ac049b7c0ad3b9fa6bb3, type: 3}
   - {fileID: 21300000, guid: 725d469231540ba468d38d8e1679764c, type: 3}
@@ -4208,6 +4208,7 @@ MonoBehaviour:
   - {fileID: 8795638779934729304}
   - {fileID: 7446842792015797303}
   - {fileID: 4379264604660547341}
+  SkillSlots: {fileID: 0}
   SkillSlot: {fileID: 6748969366419206266}
   DisplayItemSlots:
   - SlotSprite:
@@ -4219,8 +4220,6 @@ MonoBehaviour:
   - SlotSprite:
     - {fileID: 7332427771187112721}
     - {fileID: 2273862811675956804}
-  skillclass: {fileID: 0}
-  slotCanvas: {fileID: 0}
   StartList: 
   ResultIndexList: 
 --- !u!1 &6279096277385956019

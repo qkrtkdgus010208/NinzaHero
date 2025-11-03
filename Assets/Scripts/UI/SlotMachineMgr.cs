@@ -14,10 +14,14 @@ public class SlotMachineMgr : MonoBehaviour
 
   public TextMeshProUGUI[] SkillName;
   public TextMeshProUGUI[] Description;
+  public GameObject[] skillNameOb;
+  public GameObject[] DescriptionOb;
 
   public Skill[] Skills;
 
-  public GameObject SkillSlot;//애니메이션으로 쓸 스킬슬롯
+  public GameObject SkillSlots;//애니메이션으로 쓸 스킬슬롯
+
+  public GameObject SkillSlot;
 
   [System.Serializable]
   public class DisplayItemSlot
@@ -26,8 +30,6 @@ public class SlotMachineMgr : MonoBehaviour
   }
   public DisplayItemSlot[] DisplayItemSlots;
 
-  public Skill skillclass;
-  public Canvas slotCanvas;
 
 
   public List<int> StartList = new List<int>(); 
@@ -43,6 +45,7 @@ public class SlotMachineMgr : MonoBehaviour
 
 
 	for(int i =  0; i < ItemCnt * Slot.Length; i++)//12
+
 	{
 	  StartList.Add(i);//12
 	}
@@ -52,16 +55,34 @@ public class SlotMachineMgr : MonoBehaviour
 	  {
 		Slot[i].interactable = false;
 		int randomIndex = Random.Range( 0, StartList.Count);
-		if (i == 0 && j == 1 || i ==1 && j ==0 || i ==2 && j == 2)
+		if (i == 0 && j == 0 || i ==1 && j ==1 || i ==2 && j == 0)
 		{
 		  ResultIndexList.Add(StartList[randomIndex] );
 		}
 		DisplayItemSlots[i].SlotSprite[j].sprite = SkillSprite[StartList[randomIndex]]; //DisplayItemSlots[1].SlotSprite[3].sprite = SkillSprite[StartList[randomIndex]]
-
-		if ( j == 0)
+		foreach ( Skill k in Skills)
 		{
-		  DisplayItemSlots[i].SlotSprite[ItemCnt].sprite = SkillSprite[StartList[randomIndex]];
+		  if(DisplayItemSlots[i].SlotSprite[j].sprite == k.data.skillIcon)
+		  {
+			Slot[i].onClick.AddListener(k.OnClick);
+			SkillName[i].text = k.data.skillName;
+			Description[i].text = k.data.skillDesc;
+
+			foreach (GameObject q in skillNameOb)
+			{
+			  q.SetActive(false);
+			}
+			foreach (GameObject e in DescriptionOb)
+			{
+			  e.SetActive(false);
+			}
+
+		  }
+
+		 
+
 		}
+
 		StartList.RemoveAt(randomIndex);
 	
 	  }
@@ -80,13 +101,14 @@ public class SlotMachineMgr : MonoBehaviour
   IEnumerator SpinSlot(RectTransform slotRect, float itemHeight, float speed) //1
   {
 	
-	float loopDistance = itemHeight * 4;  
+	float loopDistance = itemHeight * ItemCnt;  
 	float startY = slotRect.anchoredPosition.y;
 
 	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
 
 
-	int stopIndex = 3; //4개중 제일 위
+	int stopIndex = 1
+	  ; //2개중 제일 위
 	float targetY = startY - (itemHeight * stopIndex);
 
 	bool slowingDown = false; 
@@ -120,6 +142,8 @@ public class SlotMachineMgr : MonoBehaviour
 	  }
 	
 	  yield return null;
+	  skillNameOb[0].SetActive(true);
+	  DescriptionOb[0].SetActive(true);
 	}
   }
 
@@ -127,10 +151,10 @@ public class SlotMachineMgr : MonoBehaviour
   IEnumerator SpinSlot2(RectTransform slotRect, float itemHeight, float speed) //0
   {
 	
-	float loopDistance = itemHeight * 4;  // 한 바퀴 높이 (58.2 * 5)
+	float loopDistance = itemHeight * ItemCnt;  // 한 바퀴 높이 (58.2 * 5)
 	float startY = slotRect.anchoredPosition.y;
 	
-	int stopIndex = 4;   // 0~4 중 하나에서 멈추기
+	int stopIndex = 0;   // 0~4 중 하나에서 멈추기
 	float targetY = startY - (itemHeight * stopIndex);
 
 	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
@@ -168,16 +192,18 @@ public class SlotMachineMgr : MonoBehaviour
 	  }
 
 	  yield return null;
+	  skillNameOb[1].SetActive(true);
+	  DescriptionOb[1].SetActive(true);
 	}
   }
 
   IEnumerator SpinSlot3(RectTransform slotRect, float itemHeight, float speed) //2
   {
 	
-	float loopDistance = itemHeight * 4;  // 한 바퀴 높이 (58.2 * 5)
+	float loopDistance = itemHeight * ItemCnt;  // 한 바퀴 높이 (58.2 * 5)
 	float startY = slotRect.anchoredPosition.y;
 
-	int stopIndex = 2;   // 0~4 중 하나에서 멈추기
+	int stopIndex = 1;   // 0~1 중 하나에서 멈추기
 	float targetY = startY - (itemHeight * stopIndex);
 
 	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
@@ -211,6 +237,8 @@ public class SlotMachineMgr : MonoBehaviour
 	  }
 
 	  yield return null;
+	  skillNameOb[2].SetActive(true);
+	  DescriptionOb[2].SetActive(true);
 	}
   }
 
@@ -225,7 +253,7 @@ public class SlotMachineMgr : MonoBehaviour
 	  
 	  btn.interactable = false;
 	}
-	Animator SkillAnim = SkillSlot.GetComponent<Animator>();
+	Animator SkillAnim = SkillSlots.GetComponent<Animator>();
 
 	//skill이 들어갈 곳
 
@@ -241,19 +269,10 @@ public class SlotMachineMgr : MonoBehaviour
 
   public void HideCanvas()
   {
-	slotCanvas.enabled = false;
-  }
-
-  void SkilInput(int i , int j)
-  {
-
-	
-	
-
-
-
+	SkillSlot.SetActive(false);
 
   }
+
 
 
 

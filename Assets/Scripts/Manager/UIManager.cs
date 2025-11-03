@@ -14,14 +14,14 @@ public class UIManager : MonoBehaviour
 
   
 
-  private void Start()
+  private void Awake()
   {
 	GameOver.SetActive(false);
 	GameClear.SetActive(false);
 	SkillSlot.SetActive(false);
 	StageMove.SetActive(false);
-	HpBarUI.SetActive(false);
-	ShowHpBarUI();
+	HpBarUI.SetActive(true);
+	
 	
   }
 
