@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StartUI : MonoBehaviour
+public class GameStartUI : MonoBehaviour
 {
   [SerializeField] private GameObject Cloud;
   [SerializeField] private GameObject RayLight_0;
