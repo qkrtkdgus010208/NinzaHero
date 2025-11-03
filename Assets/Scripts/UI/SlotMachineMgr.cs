@@ -15,6 +15,8 @@ public class SlotMachineMgr : MonoBehaviour
   public TextMeshProUGUI[] SkillName;
   public TextMeshProUGUI[] Description;
 
+  public Skill[] Skills;
+
   public GameObject SkillSlot;//애니메이션으로 쓸 스킬슬롯
 
   [System.Serializable]
@@ -30,7 +32,7 @@ public class SlotMachineMgr : MonoBehaviour
 
   public List<int> StartList = new List<int>(); 
   public List<int> ResultIndexList = new List<int>();
-  int ItemCnt = 4;
+  int ItemCnt = 1;
 
   private Button selectedButton = null;
 
