@@ -6,11 +6,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
 
     public PlayerController player { get; private set; }
-    private ResourceController playerResourceController;
+    public ResourceController playerResourceController;
     //public BossController boss { get; private set; }
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
+  private UIManager uiManager;
 
     [SerializeField] private int currentStageIndex = 0; // 1층, 2층, 3층
     public int stageIndex; // 1층 : 0, 1, 2 / 2층 : 3, 4 / 3층 : 5
@@ -31,10 +32,11 @@ public class GameManager : MonoBehaviour
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
+	    uiManager = GetComponentInChildren<UIManager>();
 
-        //boss = FindAnyObjectByType<BossController>();
-        //boss.Init(player.transform);
-    }
+	//boss = FindAnyObjectByType<BossController>();
+	//boss.Init(player.transform);
+  }
 
     private void Start()
     {
@@ -44,7 +46,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         StartNextStage();
-    }
+	    uiManager.ShowSkillSlot();
+  }
 
     public void ExitGame()
     {
@@ -73,5 +76,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         enemyManager.StopStage();
+        uiManager.ShowGameOver();
     }
 }

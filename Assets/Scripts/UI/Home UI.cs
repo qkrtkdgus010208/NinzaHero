@@ -29,8 +29,5 @@ public class HomeUI : BaseUI
 	GameManager.Instance.StartGame();
   }
 
-  protected override UIState GetUIState()
-  {
-	return UIState.Home;
-  }
+  
 }

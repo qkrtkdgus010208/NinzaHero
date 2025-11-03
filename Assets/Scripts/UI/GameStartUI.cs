@@ -69,7 +69,6 @@ public void OnClickStartButton()
     if( buttonAudio != null)
       buttonAudio.Play();
     SceneManager.LoadScene("GameScene");
-	GameManager.Instance.StartGame();
   }
 
 
