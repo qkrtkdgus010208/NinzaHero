@@ -1975,6 +1975,30 @@ PrefabInstance:
       propertyPath: stages.Array.data[5]
       value: 
       objectReference: {fileID: 998544886}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[6]
+      value: 
+      objectReference: {fileID: 336397511}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[7]
+      value: 
+      objectReference: {fileID: 961428708}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[8]
+      value: 
+      objectReference: {fileID: 1118471152}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[9]
+      value: 
+      objectReference: {fileID: 2101880503}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[10]
+      value: 
+      objectReference: {fileID: 1454599982}
+    - target: {fileID: 2987491316658156680, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
+      propertyPath: stages.Array.data[11]
+      value: 
+      objectReference: {fileID: 998544886}
     - target: {fileID: 5345007058371104050, guid: ef111782cc65ef44c951e13f4fe4e7d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
