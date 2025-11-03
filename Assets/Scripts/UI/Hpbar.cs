@@ -9,8 +9,6 @@ public class Hpbar : MonoBehaviour
   [SerializeField] RectTransform _barRect;
   [SerializeField] private RectMask2D _mask;
   [Range(0f, 100f)][SerializeField] private float DamageHealth = 0;
-  [SerializeField] private GameObject Player;
-  int CurrentHealth;
 
 
 
@@ -27,7 +25,6 @@ public class Hpbar : MonoBehaviour
   private void Start()
   {
 	//x = left, w = top, y = bottom, z = right
-
 
 	_maxRightMask = _barRect.rect.width - _mask.padding.x - _mask.padding.z; //full width
 	_initialRightMask = _mask.padding.z;
