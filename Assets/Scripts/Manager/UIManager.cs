@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
   private void Start()
   {
 	GameOver.SetActive(false);
+	GameClear.SetActive(false);
+	SkillSlot.SetActive(false);
+	StageMove.SetActive(false);
+	HpBarUI.SetActive(false);
 	ShowHpBarUI();
 	
   }
