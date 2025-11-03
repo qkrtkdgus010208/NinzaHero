@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
-
     public PlayerController player { get; private set; }
     private ResourceController playerResourceController;
     //public BossController boss { get; private set; }
@@ -20,9 +17,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private CameraConfinerSetter cameraConfinerSetter;
 
-    private void Awake()
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
 
         enemyManager = GetComponentInChildren<EnemyManager>();
         enemyManager.Init(this);
@@ -35,7 +32,7 @@ public class GameManager : MonoBehaviour
 
         //boss = FindAnyObjectByType<BossController>();
         //boss.Init(player.transform);
-    }
+    } 
 
     private void Start()
     {
