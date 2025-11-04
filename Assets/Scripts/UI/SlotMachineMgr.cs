@@ -48,9 +48,15 @@ public class SlotMachineMgr : MonoBehaviour
 	}
 	private void OnEnable()
 	{
-		SlotStart();
+		StartCoroutine(WaitSlot());
 		ResultIndexList.Clear();
 	}
+	IEnumerator WaitSlot()
+	{
+		yield return new WaitForSeconds(0.05f);
+		SlotStart();
+	}
+
 
 	void SlotStart()
 	{
