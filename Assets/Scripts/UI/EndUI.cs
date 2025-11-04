@@ -34,7 +34,7 @@ public class EndUI : MonoBehaviour
 
   void RestartGameScene()
   {
-    SceneManager.LoadScene ("GameScene");
+    SceneManager.LoadScene ("GameScene_sdh");
   }
  
  
