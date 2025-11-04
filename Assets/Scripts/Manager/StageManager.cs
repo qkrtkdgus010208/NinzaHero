@@ -48,7 +48,7 @@ public class StageManager : MonoBehaviour
 
     internal bool OnExit()
     {
-        if(ActiveStageController.IsClear)
+        if (ActiveStageController != null && ActiveStageController.IsClear)
         {
             NextStage();
             return true;
