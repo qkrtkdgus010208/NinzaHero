@@ -23,6 +23,19 @@ public class UIManager : MonoBehaviour
 		BossHealth.SetActive(false);
 	}
 
+	private void Update()
+	{
+	
+		if(GameManager.Instance.isBossStage)
+		{
+
+			BossHealth.SetActive(true);
+
+		}
+
+
+	}
+
 
 	public void ShowGameOver()
 	{
