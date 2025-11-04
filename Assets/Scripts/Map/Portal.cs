@@ -8,6 +8,7 @@ public class Portal : MonoBehaviour
 {
     GameManager gameManager;
     StageManager stageManager;
+    StageController stageController;
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (GameManager.Instance.StartNextStage())
+        if (stageManager.OnExit())
         {
             Debug.Log("다음스테이지로");
         }
