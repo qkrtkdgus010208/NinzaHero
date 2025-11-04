@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : BaseController
-{
+{   
     private GameManager gameManager;
     private EnemyManager enemyManager;
     private Transform target;
+    private Transform bossPos;
 
     public void Init(GameManager gameManager, EnemyManager enemyManager)
     {
@@ -21,7 +22,15 @@ public class PlayerController : BaseController
 
         if (enemyManager == null || enemyManager.activeEnemies == null || enemyManager.activeEnemies.Count == 0)
         {
-            return null;
+            if (BossController.instance == null) return null;
+            if(BossController.instance.isAlive && gameManager.isBossStage)
+            {
+                return BossController.instance.thisPos;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         foreach (var enemy in enemyManager.activeEnemies)
@@ -37,7 +46,6 @@ public class PlayerController : BaseController
                 }
             }
         }
-
         return nearestTarget;
     }
 

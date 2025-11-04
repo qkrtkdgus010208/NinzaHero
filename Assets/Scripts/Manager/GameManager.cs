@@ -4,17 +4,16 @@ public class GameManager : Singleton<GameManager>
 {
     public PlayerController player { get; private set; }
     public ResourceController playerResourceController;
-    //public BossController boss { get; private set; }
 
     private EnemyManager enemyManager;
-   
+
     private UIManager uiManager;
     public EnemyManager EnemyManager { get { return enemyManager; } }
 
     private StageManager stageManager;
     public StageManager StageManager { get { return stageManager; } }
 
-    public int stageIndex = 0;
+    public bool isBossStage = false;
 
     public static bool isFirstLoading = true;
 
@@ -35,22 +34,24 @@ public class GameManager : Singleton<GameManager>
 
         player = FindAnyObjectByType<PlayerController>();
         player.Init(this, enemyManager);
-	    uiManager = GetComponentInChildren<UIManager>();
-
-        //boss = FindAnyObjectByType<BossController>();
-        //boss.Init(player.transform);
-    } 
+        uiManager = GetComponentInChildren<UIManager>();
+    }
 
     private void Start()
     {
         StartGame();
     }
 
+    private void Update()
+    {
+        if(stageManager.ActiveStage == 5) isBossStage = true;
+    }
+
     public void StartGame()
     {
         StartNextStage();
-	    
-  }
+
+    }
 
     public void ExitGame()
     {
@@ -62,23 +63,37 @@ public class GameManager : Singleton<GameManager>
     }
 
     public bool StartNextStage()
-    {
+    { 
         player.transform.position = new Vector3(0f, -7f, 0f);
         stageManager.StartStage();
 
         cameraConfinerSetter.SetConfinerBoundingShape(stageManager.ActiveStageController.polygonCollider);
-	   uiManager.ShowSkillSlot();
-    return true;
-  }
+        uiManager.ShowSkillSlot();
+        return true;
+    }
 
     public void EndOfStage()
     {
-       // StartNextStage();
+        if (BossController.instance != null)
+        {
+            if (!BossController.instance.isAlive)
+            {
+                StartNextStage();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            StartNextStage();
+        }
     }
 
     public void GameOver()
     {
-        
+
         uiManager.ShowGameOver();
     }
 }

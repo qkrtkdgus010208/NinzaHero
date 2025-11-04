@@ -15,13 +15,14 @@ public class BossController : MonoBehaviour
 
     public bool ignorePhase;
 
+    [SerializeField] public Transform thisPos;
     [SerializeField] private Transform energyBallSpawn;
     [SerializeField] private GameObject tail;
     [SerializeField] private GameObject born;
-    [SerializeField] private LayerMask PlayerCollisionLayer;
+    private static BossController bossController;
+    public static BossController instance { get { return bossController; } }
 
     private Animator animator;
-    private CapsuleCollider2D area;
     private Vector2 direction;
 
     private int phase;
@@ -30,19 +31,17 @@ public class BossController : MonoBehaviour
 
     private bool attacking = true;
     private bool attackable = false;
-    private bool isAlive = true;
+    public bool isAlive = true;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        area = GetComponentInChildren<CapsuleCollider2D>();
-    }
 
-    private void Start()
-    {
-        
+        if(bossController == null)
+        {
+            bossController = this;
+        }
     }
-
 
     Vector3 target;
     public void Init(Transform target)
@@ -125,25 +124,22 @@ public class BossController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void Damaged(int damage)
     {
-        if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
-        {
-            attackable = true;
-            UpdateTargetPos(collision.gameObject.transform);
-            Debug.Log(attackable);
-        }
-    }
+        hp -= damage;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
-        {
-            attackable = false;
-            Debug.Log(attackable);
-        }
+        Debug.Log(hp);
+
+        if (hp <= 0) isAlive = false;
     }
-    private void UpdateTargetPos(Transform pos)
+    public void Detected(bool onTarget, Transform pos)
+    {
+        if (pos == null) return;
+        attackable = onTarget;
+
+        UpdateTargetPos(pos);
+    }
+    public void UpdateTargetPos(Transform pos)
     {
         target = pos.position;
     }
@@ -151,9 +147,5 @@ public class BossController : MonoBehaviour
     private void DragonHasFallen()
     {
         Destroy(this.gameObject);
-    }
-    public void Damaged(int damage)
-    {
-        this.hp -= damage;
     }
 }
