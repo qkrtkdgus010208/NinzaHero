@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2833396433767838293}
   - component: {fileID: 4379264604660547341}
-  - component: {fileID: 6843841467904136419}
+  - component: {fileID: 5043369022249905299}
   m_Layer: 5
   m_Name: Skill5
   m_TagString: Untagged
@@ -327,7 +327,7 @@ MonoBehaviour:
   textLevel: {fileID: 8992471164581755200}
   textName: {fileID: 8129084504882676034}
   textDesc: {fileID: 6844608572720622007}
---- !u!114 &6843841467904136419
+--- !u!114 &5043369022249905299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -606,7 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7280668943097028692}
   - component: {fileID: 7446842792015797303}
-  - component: {fileID: 3328340782837993141}
+  - component: {fileID: 2787430722413745343}
   m_Layer: 5
   m_Name: Skill 4
   m_TagString: Untagged
@@ -655,7 +655,7 @@ MonoBehaviour:
   textLevel: {fileID: 8209582646766683755}
   textName: {fileID: 1318583740102473462}
   textDesc: {fileID: 9154870384412935481}
---- !u!114 &3328340782837993141
+--- !u!114 &2787430722413745343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2135,7 +2135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1534429129849396457}
   - component: {fileID: 1751516375757425649}
-  - component: {fileID: 9056653104433966169}
+  - component: {fileID: 6678445335589789676}
   m_Layer: 5
   m_Name: Skill 2
   m_TagString: Untagged
@@ -2184,7 +2184,7 @@ MonoBehaviour:
   textLevel: {fileID: 5873134636420344011}
   textName: {fileID: 4357838649977143087}
   textDesc: {fileID: 3704152974460425281}
---- !u!114 &9056653104433966169
+--- !u!114 &6678445335589789676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2801,7 +2801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3549247972051531212}
   - component: {fileID: 8795638779934729304}
-  - component: {fileID: 1059061046742823990}
+  - component: {fileID: 1692773463455769018}
   m_Layer: 5
   m_Name: Skill 3
   m_TagString: Untagged
@@ -2850,7 +2850,7 @@ MonoBehaviour:
   textLevel: {fileID: 2622396789184378585}
   textName: {fileID: 3980771732822370125}
   textDesc: {fileID: 6582898980741308103}
---- !u!114 &1059061046742823990
+--- !u!114 &1692773463455769018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5704,7 +5704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3266881520939401886}
   - component: {fileID: 5637116601120792874}
-  - component: {fileID: 2599660314536533410}
+  - component: {fileID: 775505968955154965}
   m_Layer: 5
   m_Name: Skill 0
   m_TagString: Untagged
@@ -5753,7 +5753,7 @@ MonoBehaviour:
   textLevel: {fileID: 5188476148825795100}
   textName: {fileID: 8349905174196608243}
   textDesc: {fileID: 3328284616454758570}
---- !u!114 &2599660314536533410
+--- !u!114 &775505968955154965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5807,7 +5807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3570836002183427399}
   - component: {fileID: 1036556174384600489}
-  - component: {fileID: 2945398511632185899}
+  - component: {fileID: 3478469157237480048}
   m_Layer: 5
   m_Name: Skill 1
   m_TagString: Untagged
@@ -5856,7 +5856,7 @@ MonoBehaviour:
   textLevel: {fileID: 4737639519936565414}
   textName: {fileID: 763926202487055106}
   textDesc: {fileID: 8904613452743089492}
---- !u!114 &2945398511632185899
+--- !u!114 &3478469157237480048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
