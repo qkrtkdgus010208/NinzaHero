@@ -107,7 +107,7 @@ public void OnClickStartButton()
   IEnumerator wait()
   {
     yield return new WaitForSeconds(1f);
-	SceneManager.LoadScene("GameScene");
+	SceneManager.LoadScene("GameScene_sdh");
   }
 
 
