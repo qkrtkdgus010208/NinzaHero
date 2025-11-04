@@ -14,13 +14,13 @@ public class BossController : MonoBehaviour
     }
 
     public bool ignorePhase;
-    public bool isActive = true;
 
     [SerializeField] public Transform thisPos;
     [SerializeField] private Transform energyBallSpawn;
     [SerializeField] private GameObject tail;
     [SerializeField] private GameObject born;
-    
+    private static BossController bossController;
+    public static BossController instance { get { return bossController; } }
 
     private Animator animator;
     private Vector2 direction;
@@ -36,11 +36,11 @@ public class BossController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
 
-    private void Start()
-    {
-        isActive = true;   
+        if(bossController == null)
+        {
+            bossController = this;
+        }
     }
 
     Vector3 target;
@@ -146,7 +146,6 @@ public class BossController : MonoBehaviour
 
     private void DragonHasFallen()
     {
-        isActive = false;
         Destroy(this.gameObject);
     }
 }

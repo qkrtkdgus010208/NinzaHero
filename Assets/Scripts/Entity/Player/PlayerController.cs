@@ -3,12 +3,11 @@ using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : BaseController
-{
-    [SerializeField] BossController boss;
-    
+{   
     private GameManager gameManager;
     private EnemyManager enemyManager;
     private Transform target;
+    private Transform bossPos;
 
     public void Init(GameManager gameManager, EnemyManager enemyManager)
     {
@@ -23,10 +22,10 @@ public class PlayerController : BaseController
 
         if (enemyManager == null || enemyManager.activeEnemies == null || enemyManager.activeEnemies.Count == 0)
         {
-            if (boss == null) return null;
-            if(boss.isAlive && boss.isActive)
+            if (BossController.instance == null) return null;
+            if(BossController.instance.isAlive && gameManager.isBossStage)
             {
-                return boss.thisPos;
+                return BossController.instance.thisPos;
             }
             else
             {
@@ -47,7 +46,6 @@ public class PlayerController : BaseController
                 }
             }
         }
-
         return nearestTarget;
     }
 
