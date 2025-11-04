@@ -4,8 +4,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : BaseController
 {
-    private static readonly float BOSS_POS_ADJUST = 20f;
-
     [SerializeField] BossController boss;
     
     private GameManager gameManager;
