@@ -21,22 +21,16 @@ public class Detected : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log($"¢º Trigger Enter: {collision.name}, Layer: {collision.gameObject.layer}, Tag: {collision.tag}");
-        if ((PlayerCollisionLayer.value & (1 << collision.gameObject.layer)) != 0)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"¢º Trigger Enter: {collision.name}, Layer: {collision.gameObject.layer}, Tag: {collision.tag}");
-            Debug.Log("Å½ÁöµÇ¾ú´Ù");
             detect = true;
             target = collision.gameObject.transform;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("¹þ¾î³²");
-
-        if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("¹þ¾î³²");
             detect = false;
             target = null;
         }

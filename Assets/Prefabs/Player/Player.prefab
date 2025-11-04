@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8829709408067748273}
   m_Layer: 6
   m_Name: ProjectileSpawnPoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8685740906635824256}
   m_Layer: 6
   m_Name: MainSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 5958447564857815031}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bcd6dd1dabdde4e8a278a3862e0d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  godMode: 0
 --- !u!114 &4282182699681557042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba140d5902492045b5746ecc9da305e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 1000
   speed: 3
 --- !u!114 &5157777933578794931
 MonoBehaviour:
@@ -324,11 +325,11 @@ MonoBehaviour:
   knockbackTime: 0.1
   projectileSpawnPosition: {fileID: 8829709408067748273}
   bulletIndex: 0
-  bulletSize: 1
+  bulletSize: 0.75
   duration: 3
-  spread: 0
+  spread: 3
   numberofProjectilesPerShot: 1
-  multipleProjectilesAngel: 0
+  multipleProjectilesAngel: 3
 --- !u!114 &5958447564857815031
 MonoBehaviour:
   m_ObjectHideFlags: 0
