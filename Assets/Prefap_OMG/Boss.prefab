@@ -74,9 +74,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 2000
-  ignorePhase: 1
   thisPos: {fileID: 0}
-  energyBallSpawn: {fileID: 0}
+  energyBallSpawn:
+  - {fileID: 0}
   tail: {fileID: 867223049740810685, guid: 73dced87bae2ece4686c4486cf2c63fd, type: 3}
   born: {fileID: 5466902229958802322, guid: 89c558968c30e6c41b569630bb0b539d, type: 3}
   isAlive: 1

@@ -12,11 +12,8 @@ public class BossController : MonoBehaviour
         get => hp;
         set => Mathf.Clamp(value, 0, 2000);
     }
-
-    public bool ignorePhase;
-
     [SerializeField] public Transform thisPos;
-    [SerializeField] private Transform energyBallSpawn;
+    [SerializeField] private Transform[] energyBallSpawn;
     [SerializeField] private GameObject tail;
     [SerializeField] private GameObject born;
     private static BossController bossController;
@@ -26,6 +23,8 @@ public class BossController : MonoBehaviour
     private Vector2 direction;
 
     private int phase;
+    private int energySpawnPosCount = 0;
+    private int touchDamage = 200;
     private float delay = 4.0f;
     private float time;
 
@@ -37,7 +36,7 @@ public class BossController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        if(bossController == null)
+        if (bossController == null)
         {
             bossController = this;
         }
@@ -84,8 +83,6 @@ public class BossController : MonoBehaviour
 
     public void Attack()
     {
-        if (attacking) return; 
-
         if (hp > 1500) phase = 1;
         else if (hp > 1000) phase = 2;
         else if (hp > 500) phase = 3;
@@ -93,9 +90,8 @@ public class BossController : MonoBehaviour
 
         animator.SetTrigger("IsAttack");
 
-        for(int i = 0; i < phase; i++)
+        for (int i = 0; i < phase; i++)
         {
-            Debug.Log("즉사기 생성");
             float tailX = target.x - (Random.Range(-2.0f, 2.0f));
             float tailY = target.y - (Random.Range(-2.0f, 2.0f));
 
@@ -103,22 +99,25 @@ public class BossController : MonoBehaviour
 
             Instantiate(tail, InstPos, Quaternion.identity);
         }
-    }  
+    }
     private void ShootEnergyBall()
     {
-        if (!ignorePhase)
+        if (phase < 2) return;
+        else
         {
-            if (phase < 2) return;
+            if (phase == 2) energySpawnPosCount = 1;
+            else if (phase == 3) energySpawnPosCount = 2;
+            else energySpawnPosCount = 3;
         }
 
         if (target == null) return;
-        
-        direction = (target - energyBallSpawn.position).normalized;
-        animator.SetTrigger("IsAttack");
 
-        for (int i = 0; i < phase; i++)
+        for (int i = 0; i < energySpawnPosCount; i++)
         {
-            Instantiate(born, energyBallSpawn.position, Quaternion.identity);
+            direction = (target - energyBallSpawn[i].position).normalized;
+            animator.SetTrigger("IsAttack");
+
+            Instantiate(born, energyBallSpawn[i].position, Quaternion.identity);
             EnergyBallController energyBall = FindAnyObjectByType<EnergyBallController>();
             energyBall.Init(direction);
         }
@@ -146,6 +145,20 @@ public class BossController : MonoBehaviour
 
     private void DragonHasFallen()
     {
+
+        phase = 0;
         Destroy(this.gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ResourceController resource = collision.GetComponent<ResourceController>();
+            if (resource != null)
+            {
+                resource.ChangeHealth(-touchDamage);
+            }
+        }
+    }
+
 }
