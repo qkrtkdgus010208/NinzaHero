@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
 
     private EnemyManager enemyManager;
 
-    private UIManager uiManager;
+    public UIManager uiManager;
     public EnemyManager EnemyManager { get { return enemyManager; } }
 
     private StageManager stageManager;

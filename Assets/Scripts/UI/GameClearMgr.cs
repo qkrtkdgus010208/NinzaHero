@@ -17,7 +17,10 @@ public class GameClearMgr : MonoBehaviour
     Next.onClick.AddListener(NextStage);
     }
 
-  void StartScene()
+	
+
+
+	void StartScene()
   {
        SceneManager.LoadScene("StartScene");
   }

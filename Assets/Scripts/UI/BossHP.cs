@@ -26,8 +26,8 @@ public class BossHP : MonoBehaviour
   {
 	//x = left, w = top, y = bottom, z = right
 
-	_maxRightMask = _barRect.rect.width - _mask.padding.x - _mask.padding.z; //full width
-	_initialRightMask = _mask.padding.z;
+	_maxRightMask = _barRect.rect.width - _mask.padding.x - _mask.padding.z; //full width   179.78
+		_initialRightMask = _mask.padding.z;
   }
 
   public void SetValue() //newValue = Current hp 
@@ -38,6 +38,7 @@ public class BossHP : MonoBehaviour
 	  padding.z = newRightMask;
 	_mask.padding = padding;
   }
+
 
 
 }

@@ -32,10 +32,24 @@ public class UIManager : MonoBehaviour
 			BossHealth.SetActive(true);
 
 		}
+		if(BossController.instance.Hp == 0)
+		{
+
+			StartCoroutine(Wait());
+
+		}
 
 
 	}
 
+	IEnumerator Wait()
+	{
+
+		yield return new WaitForSeconds(1f);
+		GameClear.SetActive(true);
+
+
+	}
 
 	public void ShowGameOver()
 	{
