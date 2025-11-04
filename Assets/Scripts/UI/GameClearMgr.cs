@@ -10,6 +10,7 @@ public class GameClearMgr : MonoBehaviour
   [SerializeField] private Button Main;
   [SerializeField] private Button Next;
 
+
     void Start()
     {
     Main.onClick.AddListener(StartScene);
@@ -18,7 +19,7 @@ public class GameClearMgr : MonoBehaviour
 
   void StartScene()
   {
-    SceneManager.LoadScene("StartScene");
+       SceneManager.LoadScene("StartScene");
   }
 
   void NextStage()

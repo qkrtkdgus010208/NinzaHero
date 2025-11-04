@@ -64,7 +64,7 @@ public class SlotMachineMgr : MonoBehaviour
 			{
 				Slot[i].interactable = false;
 				int randomIndex = Random.Range(0, StartList.Count);
-				if(i == 0 && j == 0 || i == 1 && j == 1 || i == 2 && j == 0)
+				if(i == 0 && j == 0 || i == 1 && j == 0 || i == 2 && j == 0)
 				{
 					ResultIndexList.Add(StartList[randomIndex]);
 				}
@@ -131,12 +131,12 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg  = SlotSkillObject[0].GetComponent<RectTransform>();
 		
-		for (int i = 0; i < ItemCnt *2*6 +2 ; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			gg.anchoredPosition -= new Vector2( 0,29.11f);
-			if (SlotSkillObject[0].transform.localPosition.y < -86.1445f)
+			gg.anchoredPosition -= new Vector2( 0, 29.11445f);
+			if (SlotSkillObject[0].transform.localPosition.y < -29.1289f)
 			{
-				SlotSkillObject[0].transform.localPosition += new Vector3 (0,232.88f,0);
+				SlotSkillObject[0].transform.localPosition += new Vector3 (0, 58.2289f, 0);
 
 			}
 			yield return null;
@@ -152,12 +152,12 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg = SlotSkillObject[1].GetComponent<RectTransform>();
 
-		for (int i = 0; i < ItemCnt * 2 * 7; i++)
+		for (int i = 0; i < 12; i++)
 		{
-			gg.anchoredPosition -= new Vector2(0, 29.11f);
-			if (SlotSkillObject[1].transform.localPosition.y < -86.1445f)
+			gg.anchoredPosition -= new Vector2(0, 29.11445f);
+			if (SlotSkillObject[1].transform.localPosition.y <= -29.1289f)
 			{
-				SlotSkillObject[1].transform.localPosition += new Vector3(0, 232.88f, 0);
+				SlotSkillObject[1].transform.localPosition += new Vector3(0, 58.2289f, 0);
 
 			}
 			yield return null;
@@ -172,12 +172,12 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg = SlotSkillObject[2].GetComponent<RectTransform>();
 
-		for (int i = 0; i < ItemCnt * 2 * 5 + 2; i++)
+		for (int i = 0; i < 12 ; i++)
 		{
-			gg.anchoredPosition -= new Vector2(0, 29.11f);
-			if (SlotSkillObject[2].transform.localPosition.y < -86.1445f)
+			gg.anchoredPosition -= new Vector2(0, 29.11445f);
+			if (SlotSkillObject[2].transform.localPosition.y < -29.1289f)
 			{
-				SlotSkillObject[2].transform.localPosition += new Vector3(0, 232.88f, 0);
+				SlotSkillObject[2].transform.localPosition += new Vector3(0, 58.2289f, 0);
 
 			}
 			yield return null;
