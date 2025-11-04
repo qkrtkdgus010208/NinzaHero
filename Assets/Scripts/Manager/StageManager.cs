@@ -22,16 +22,22 @@ public class StageManager : MonoBehaviour
         enemyManager = gameManager.EnemyManager;
 
         stageControllers = GetComponentsInChildren<StageController>(true);
-    }
+		ActiveStageController= stageControllers[0];
+	}
 
     public void StartStage()
     {
-      OnExit();
-        ActiveStageController = stageControllers[ActiveStage];
+		ActiveStageController.SetActive(false);
+		ActiveStageController = stageControllers[ActiveStage];
 
-        ActiveStageController.SetActive(true);
-        ActiveStageController.StartPhase(this, gameManager, enemyManager);
-    }
+        
+		ActiveStageController.SetActive(true);
+		ActiveStageController.StartPhase(this, gameManager, enemyManager);
+		ActiveStage += 1;
+		
+        
+      
+	}
 
     public void DeathOfEnemy(EnemyController enemy)
     {
