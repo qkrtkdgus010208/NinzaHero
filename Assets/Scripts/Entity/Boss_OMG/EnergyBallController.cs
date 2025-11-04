@@ -20,10 +20,12 @@ public class EnergyBallController : MonoBehaviour
 
     private Vector2 direction;
     private Vector2 reflect;
+    private Animator anim;
 
     private float reflectAngle = 45f;
     private float MaxDuration = 10.0f;
     private float inAirDuration = 0f;
+    private float destroyDelay = 0.8f;
     private float speed = 2f;
 
     private int bounceCount = 0;
@@ -32,6 +34,10 @@ public class EnergyBallController : MonoBehaviour
     private bool inAir = false;
     private bool isReflect = false;
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     public void Init(Vector2 direction)
     {
         this.direction = direction * speed;
@@ -52,29 +58,41 @@ public class EnergyBallController : MonoBehaviour
 
             if (inAirDuration >= MaxDuration)
             {
-                DestroyBorn();
+                ScatterEnergy();
                 inAir = false;
                 inAirDuration = 0f;
             }
         }
     }
 
-    private void DestroyBorn()
+    private void ScatterEnergy()
     {
+        this.transform.position = this.transform.position;
         isReflect = false;
+
+        StartCoroutine(AnimeActDelay(destroyDelay));
+    }
+
+    private IEnumerator AnimeActDelay(float delay)
+    {
+        Debug.Log("애니메이션 트리거 발동!");
+        anim.SetTrigger("IsDestroy");
+
+        yield return new WaitForSeconds(delay);
         Destroy(this.gameObject);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-            DestroyBorn();
             ResourceController resource = collision.GetComponent<ResourceController>();
             if (resource != null)
             {
                 resource.ChangeHealth(-damage);
             }
+            ScatterEnergy();
         }
         else if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer))
             || bounceSpotCollisionLayer.value == (bounceSpotCollisionLayer.value | (1 << collision.gameObject.layer)))
@@ -93,7 +111,7 @@ public class EnergyBallController : MonoBehaviour
 
         if (bounceCount > maxBounce)
         {
-            DestroyBorn();
+            ScatterEnergy();
         }
     }
 }
