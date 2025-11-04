@@ -17,7 +17,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (stageManager.OnExit())
+        if (GameManager.Instance.StartNextStage())
         {
             Debug.Log("다음스테이지로");
         }

@@ -830,6 +830,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyPrefabs: []
+  spawnCount: 
+  polygonCollider: {fileID: 0}
 --- !u!1 &2931451102861289963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,7 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5231ac9f58c00e4b9b26c19a64c7700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  Trapdamage: 50
   hitCooldown: 1
 --- !u!1 &8273722370181395732
 GameObject:
