@@ -47,7 +47,7 @@ public class StageController : MonoBehaviour
         this.gameManager = gameManager;
         this.enemyManager = enemyManager;
 
-        if(enemyPrefabs.Count <= 0)
+        if (enemyPrefabs.Count <= 0)
         {
             Debug.Log($"{gameObject.name} 셋팅 안함");
             isClear = true;

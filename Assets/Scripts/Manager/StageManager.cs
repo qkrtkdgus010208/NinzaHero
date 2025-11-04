@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class StageManager : MonoBehaviour
 {
     private GameManager gameManager;
     private EnemyManager enemyManager;
 
     [SerializeField] private StageController[] stages;
+    [SerializeField] private Transform group_01_03; 
+    [SerializeField] private Transform group_04_05;
+    [SerializeField] private Transform group_Boss;
 
     public int ActiveStage { get; private set; } = 0;
 
@@ -22,39 +26,57 @@ public class StageManager : MonoBehaviour
         enemyManager = gameManager.EnemyManager;
 
         stageControllers = GetComponentsInChildren<StageController>(true);
-		ActiveStageController= stageControllers[0];
 	}
 
+    private StageController ActivateRandom(Transform group)
+    {
+        //그룹의 자식들 중 하나를 랜덤으로 선택
+        Transform map =  group.GetChild(Random.Range(0, group.childCount));
+        StageController sc1 =  map.GetComponent<StageController>();
+        sc1.SetActive(true);
+        return sc1;
+
+        //var stage = new List<StageController>();
+        //for (int i = 0; i < group.childCount; i++)
+        //{
+        //    var child = group.GetChild(i);
+        //    var sc = child.GetComponent<StageController>();
+        //    child.gameObject.SetActive(false);
+        //    if (sc != null) stage.Add(sc);
+        //}
+
+        //var pick = stage[Random.Range(0, stage.Count)];
+        //pick.SetActive(true);
+        //return pick;
+    }
     public void StartStage()
     {
-		ActiveStageController.SetActive(false);
-		ActiveStageController = stageControllers[ActiveStage];
+        if (ActiveStage == 0)
+            ActiveStageController = ActivateRandom(group_01_03);
+        else if (ActiveStage == 1)
+            ActiveStageController = ActivateRandom(group_04_05);
+        else
+            ActiveStageController = ActivateRandom(group_Boss);
 
-        
-		ActiveStageController.SetActive(true);
-		ActiveStageController.StartPhase(this, gameManager, enemyManager);
-		ActiveStage += 1;
-		
-        
-      
-	}
+        ActiveStageController?.StartPhase(this, gameManager, enemyManager);
+    }
 
     public void DeathOfEnemy(EnemyController enemy)
     {
         ActiveStageController.IsOver();
     }
 
-    private void NextStage()
+    public void NextStage()
     {
         ActiveStageController.SetActive(false);
 
         ActiveStage += 1;
-        StartStage();
+        gameManager.StartNextStage();
     }
 
     internal bool OnExit()
     {
-        if(ActiveStageController.IsClear)
+        if (ActiveStageController != null && ActiveStageController.IsClear)
         {
             NextStage();
             return true;
