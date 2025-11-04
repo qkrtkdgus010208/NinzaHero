@@ -28,18 +28,25 @@ public class UIManager : MonoBehaviour
 		if(GameManager.Instance.isBossStage)
 		{
 			BossHealth.SetActive(true);
+			BossSpawned();
 		}
-		if(BossController.instance != null && BossController.instance.Hp == 0)
-		{
-			StartCoroutine(WaitClear());
-		}
+		
 	}
 
-	IEnumerator WaitClear()
+	
+	void BossSpawned()
 	{
-		yield return new WaitForSeconds(1f);
-		GameClear.SetActive(true);
+
+		if (BossController.instance != null && BossController.instance.Hp == 0)
+		{
+			GameClear.SetActive(true);
+		}
+
+
 	}
+
+
+
 
 	public void ShowGameOver()
 	{
