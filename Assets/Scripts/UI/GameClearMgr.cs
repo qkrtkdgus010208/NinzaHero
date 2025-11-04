@@ -13,24 +13,29 @@ public class GameClearMgr : MonoBehaviour
 
     void Start()
     {
-    Main.onClick.AddListener(StartScene);
-    Next.onClick.AddListener(NextStage);
+   
     }
+	private void OnEnable()
+	{
+		Main.onClick.AddListener(StartScene);
+		Next.onClick.AddListener(NextStage);
+	}
 
-	
 
 
 	void StartScene()
   {
        SceneManager.LoadScene("StartScene");
+	   GameManager.Instance.uiManager.isGameClear = true;
   }
 
   void NextStage()
   {
 
         GameManager.Instance.StartNextStage();
+		GameManager.Instance.uiManager.isGameClear = true;
 
-  }
+	}
 
   
 

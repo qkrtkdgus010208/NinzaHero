@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class UIManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
 	public GameObject GameOver;
 	public GameObject BossHealth;
 
+	public bool isGameClear;
 
 
 	private void Awake()
@@ -30,14 +32,24 @@ public class UIManager : MonoBehaviour
 			BossHealth.SetActive(true);
 			BossSpawned();
 		}
-		
+
+
+		if (isGameClear  == true)
+		{
+			Debug.Log("isGameClear == true");
+
+			GameClear.SetActive(false);
+			BossHealth.SetActive(false);
+			isGameClear = false;
+		}
+
 	}
 
 	
 	void BossSpawned()
 	{
 
-		if (BossController.instance != null && BossController.instance.Hp == 0)
+		if (BossController.instance.isAlive == false)
 		{
 			GameClear.SetActive(true);
 		}
