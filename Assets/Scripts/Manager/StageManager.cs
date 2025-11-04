@@ -11,9 +11,9 @@ public class StageManager : MonoBehaviour
 
     public int ActiveStage { get; private set; } = 0;
 
-    public StageController ActiveStageController { get; private set; }
+    public StageController ActiveStageController;
 
-    public StageController[] stageControllers { get; private set; }
+    public StageController[] stageControllers;
 
     public void Init(GameManager gm)
     {
@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
 
     public void StartStage()
     {
+      OnExit();
         ActiveStageController = stageControllers[ActiveStage];
 
         ActiveStageController.SetActive(true);

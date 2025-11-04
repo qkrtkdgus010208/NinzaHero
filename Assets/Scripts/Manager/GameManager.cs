@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         StartNextStage();
-	    uiManager.ShowSkillSlot();
+	    
   }
 
     public void ExitGame()
@@ -61,13 +61,15 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
-    private void StartNextStage()
+    public bool StartNextStage()
     {
         player.transform.position = new Vector3(0f, -7f, 0f);
         stageManager.StartStage();
 
         cameraConfinerSetter.SetConfinerBoundingShape(stageManager.ActiveStageController.polygonCollider);
-    }
+	   uiManager.ShowSkillSlot();
+    return true;
+  }
 
     public void EndOfStage()
     {
