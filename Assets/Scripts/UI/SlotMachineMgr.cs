@@ -6,272 +6,221 @@ using UnityEngine.UI;
 
 public class SlotMachineMgr : MonoBehaviour
 {
-  public GameObject[] SlotSkillObject;
- 
-  public Button[] Slot;
+	public GameObject[] SlotSkillObject;// 두루마리같은 오브젝트 3개
 
-  public Sprite[] SkillSprite;
+	public Button[] Slot;
 
-  public TextMeshProUGUI[] SkillName;
-  public TextMeshProUGUI[] Description;
-  public GameObject[] skillNameOb;
-  public GameObject[] DescriptionOb;
+	public Sprite[] SkillSprite;
 
-  public Skill[] Skills;
+	public TextMeshProUGUI[] SkillName;
+	public TextMeshProUGUI[] Description;
+	public GameObject[] skillNameOb;
+	public GameObject[] DescriptionOb;
 
-  public GameObject SkillSlots;//애니메이션으로 쓸 스킬슬롯
+	public Skill[] Skills;
 
-  public GameObject SkillSlot;
+	public GameObject SkillSlots;//ui에 있는거 두루마리랑 텍스트 그런것들 백그라운드는 포함안되고 그런것들 다 한번에 내려갔다가 위로올라가는거 만드는거임
 
-  [System.Serializable]
-  public class DisplayItemSlot
-  {
-    public List<Image> SlotSprite = new List<Image>();
-  }
-  public DisplayItemSlot[] DisplayItemSlots;
+	public GameObject SkillSlot; //얘는 이거 다 담고있는거 그냥 이거 그 ui이 자체를 껐다킬때 사용하는거임 버튼에 이미지 할당 끝나면 버튼에 onclick에 
+								 // addAddListener 달아서 OnSlotClicked 함수 넣어서 이거 실행되면 그 ui 이거 내려갔다 올라가는 애니메이션 실행되게하고
+								 //그다음에 실행 끝나면 invoke로 1초있다가 이거 ui전체 끌려고 오브젝트 만들어둔거
 
-
-
-  public List<int> StartList = new List<int>(); 
-  public List<int> ResultIndexList = new List<int>();
-  int ItemCnt = 1;
-
-  private Button selectedButton = null;
-
-  void Start()
-  {
-
-
-
-
-	for(int i =  0; i < ItemCnt * Slot.Length; i++)//12
-
+	[System.Serializable]
+	public class DisplayItemSlot
 	{
-	  StartList.Add(i);//12
+		public List<Image> SlotSprite = new List<Image>();
 	}
-	for(int i = 0 ;  i <Slot.Length; i++)//3
+	public DisplayItemSlot[] DisplayItemSlots;
+
+
+
+	public List<int> StartList = new List<int>();
+	public List<int> ResultIndexList = new List<int>();
+	int ItemCnt = 2;
+
+	private Button selectedButton = null;
+
+	void Start()
 	{
-	  for ( int j = 0; j <ItemCnt; j++)//3
-	  {
-		Slot[i].interactable = false;
-		int randomIndex = Random.Range( 0, StartList.Count);
-		if (i == 0 && j == 0 || i ==1 && j ==1 || i ==2 && j == 0)
+
+
+
+	}
+	private void OnEnable()
+	{
+		SlotStart();
+		ResultIndexList.Clear();
+	}
+
+	void SlotStart()
+	{
+		for (int i = 0; i < ItemCnt * Slot.Length; i++)//6
 		{
-		  ResultIndexList.Add(StartList[randomIndex] );
+			StartList.Add(i);//
 		}
-		DisplayItemSlots[i].SlotSprite[j].sprite = SkillSprite[StartList[randomIndex]]; //DisplayItemSlots[1].SlotSprite[3].sprite = SkillSprite[StartList[randomIndex]]
-		foreach ( Skill k in Skills)
+		for (int i = 0; i < Slot.Length; i++)//slot1 slot2 slot3    
 		{
-		  if(DisplayItemSlots[i].SlotSprite[j].sprite == k.data.skillIcon)
-		  {
-			Slot[i].onClick.AddListener(k.OnClick);
-			SkillName[i].text = k.data.skillName;
-			Description[i].text = k.data.skillDesc;
-
-			foreach (GameObject q in skillNameOb)
+			for (int j = 0; j < ItemCnt; j++)//image1 image2   22222222222
 			{
-			  q.SetActive(false);
+				Slot[i].interactable = false;
+				int randomIndex = Random.Range(0, StartList.Count);
+				if(i == 0 && j == 0 || i == 1 && j == 1 || i == 2 && j == 0)
+				{
+					ResultIndexList.Add(StartList[randomIndex]);
+				}
+
+				DisplayItemSlots[i].SlotSprite[j].sprite = SkillSprite[StartList[randomIndex]]; //DisplayItemSlots[1].SlotSprite[3].sprite = SkillSprite[StartList[randomIndex]]
+
+				
+
+
+				StartList.RemoveAt(randomIndex);
+
 			}
-			foreach (GameObject e in DescriptionOb)
+
+			
+		}
+		foreach (Skill k in Skills)
+		{
+			for (int Y = 0; Y < ResultIndexList.Count; Y++)
 			{
-			  e.SetActive(false);
+
+				if (SkillSprite[ResultIndexList[Y]] == k.data.skillIcon)
+				{
+					Slot[Y].onClick.AddListener(k.OnClick);
+					SkillName[Y].text = k.data.skillName;
+					Description[Y].text = k.data.skillDesc;
+
+					foreach (GameObject q in skillNameOb)
+					{
+						q.SetActive(false);
+					}
+					foreach (GameObject e in DescriptionOb)
+					{
+						e.SetActive(false);
+					}
+				}
 			}
-
-		  }
-
-		 
-
 		}
 
-		StartList.RemoveAt(randomIndex);
+		StartCoroutine(StartSlot1());
+		StartCoroutine(StartSlot2());
+		StartCoroutine(StartSlot3());
+
+		foreach (GameObject q in skillNameOb)
+		{
+			q.SetActive(true);
+		}
+		foreach (GameObject e in DescriptionOb)
+		{
+			e.SetActive(true);
+		}
+
+
+		foreach (Button slot in Slot)
+		{
+			slot.onClick.AddListener(() => OnSlotClicked(slot));
+		}
+
 	
-	  }
 	}
-	foreach (Button slot in Slot)
+
+
+	IEnumerator StartSlot1()
 	{
-	  slot.onClick.AddListener(() => OnSlotClicked(slot));
-	}
-	StartCoroutine(SpinSlot(SlotSkillObject[0].GetComponent<RectTransform>(), 58.2289f, 600f));
-	StartCoroutine(SpinSlot2(SlotSkillObject[1].GetComponent<RectTransform>(), 58.2289f, 600f));
-	StartCoroutine(SpinSlot3(SlotSkillObject[2].GetComponent<RectTransform>(), 58.2289f, 600f));
 
-	
-
-  }
-  IEnumerator SpinSlot(RectTransform slotRect, float itemHeight, float speed) //1
-  {
-	
-	float loopDistance = itemHeight * ItemCnt;  
-	float startY = slotRect.anchoredPosition.y;
-
-	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
-
-
-	int stopIndex = 1
-	  ; //2개중 제일 위
-	float targetY = startY - (itemHeight * stopIndex);
-
-	bool slowingDown = false; 
-	while (true )
-	{
-	  float step = speed * Time.deltaTime; 
-	  slotRect.anchoredPosition -= new Vector2(0, step);
-	 
-	  elapsed += Time.deltaTime;
-
-
-
-	  if (slotRect.anchoredPosition.y <= -27.8F)
-	  {
-		slotRect.anchoredPosition += new Vector2(0, loopDistance);
+		RectTransform gg  = SlotSkillObject[0].GetComponent<RectTransform>();
 		
+		for (int i = 0; i < ItemCnt *2*6 +2 ; i++)
+		{
+			gg.anchoredPosition -= new Vector2( 0,29.11f);
+			if (SlotSkillObject[0].transform.localPosition.y < -86.1445f)
+			{
+				SlotSkillObject[0].transform.localPosition += new Vector3 (0,232.88f,0);
 
-	  }
-
-	  if (slowingDown && Mathf.Abs(slotRect.anchoredPosition.y - targetY) < 1.5f)
-	  {
-		slotRect.anchoredPosition = new Vector2(slotRect.anchoredPosition.x, targetY);
+			}
+			yield return null;
+		}
 		Slot[0].interactable = true;
-		break; 
-	  }
 
-	  
-	  if (elapsed > 1f && !slowingDown)
-	  {
-		slowingDown = true;
-	  }
-	
-	  yield return null;
-	  skillNameOb[0].SetActive(true);
-	  DescriptionOb[0].SetActive(true);
+
 	}
-  }
 
 
-  IEnumerator SpinSlot2(RectTransform slotRect, float itemHeight, float speed) //0
-  {
-	
-	float loopDistance = itemHeight * ItemCnt;  // 한 바퀴 높이 (58.2 * 5)
-	float startY = slotRect.anchoredPosition.y;
-	
-	int stopIndex = 0;   // 0~4 중 하나에서 멈추기
-	float targetY = startY - (itemHeight * stopIndex);
-
-	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
-
-	bool slowingDown = false; // 속도 줄이기 시작했는가
-
-	while (true)
+	IEnumerator StartSlot2()
 	{
-	  float step = speed * Time.deltaTime; // 프레임당 이동 거리
-	  slotRect.anchoredPosition -= new Vector2(0, step);
 
-	  elapsed += Time.deltaTime;
-	  // 한 칸(58.2px)을 넘어가면 다음 칸으로 정렬
+		RectTransform gg = SlotSkillObject[1].GetComponent<RectTransform>();
 
+		for (int i = 0; i < ItemCnt * 2 * 7; i++)
+		{
+			gg.anchoredPosition -= new Vector2(0, 29.11f);
+			if (SlotSkillObject[1].transform.localPosition.y < -86.1445f)
+			{
+				SlotSkillObject[1].transform.localPosition += new Vector3(0, 232.88f, 0);
 
-	  // 맨 아래까지 내려가면 위로 되감기
-	  if (slotRect.anchoredPosition.y <= -27.8F)
-	  {
-		slotRect.anchoredPosition += new Vector2(0, loopDistance);
-		
-	  }
-
-	  if (slowingDown && Mathf.Abs(slotRect.anchoredPosition.y - targetY) < 1.5f)
-	  {
-		slotRect.anchoredPosition = new Vector2(slotRect.anchoredPosition.x, targetY);
+			}
+			yield return null;
+		}
 		Slot[1].interactable = true;
 
-		break; // while문 종료 (코루틴 끝)
-	  }
 
-	  // 예시: 2초 후 감속 시작
-	  if (elapsed > 1f && !slowingDown)
-	  {
-		slowingDown = true;
-	  }
-
-	  yield return null;
-	  skillNameOb[1].SetActive(true);
-	  DescriptionOb[1].SetActive(true);
 	}
-  }
 
-  IEnumerator SpinSlot3(RectTransform slotRect, float itemHeight, float speed) //2
-  {
-	
-	float loopDistance = itemHeight * ItemCnt;  // 한 바퀴 높이 (58.2 * 5)
-	float startY = slotRect.anchoredPosition.y;
-
-	int stopIndex = 1;   // 0~1 중 하나에서 멈추기
-	float targetY = startY - (itemHeight * stopIndex);
-
-	float elapsed = 0f;//코루틴이 시작한 뒤부터 걸리는 시간
-
-	bool slowingDown = false; // 속도 줄이기 시작했는가
-
-	while (true)
+	IEnumerator StartSlot3()
 	{
-	  float step = speed * Time.deltaTime; // 프레임당 이동 거리
-	  slotRect.anchoredPosition -= new Vector2(0, step);
 
-	  elapsed += Time.deltaTime;
-	  // 맨 아래까지 내려가면 위로 되감기
-	  if (slotRect.anchoredPosition.y <= -27.8F)
-	  {
-		slotRect.anchoredPosition += new Vector2(0, loopDistance);
-		
-	  }
+		RectTransform gg = SlotSkillObject[2].GetComponent<RectTransform>();
 
-	  if (slowingDown && Mathf.Abs(slotRect.anchoredPosition.y - targetY) < 1.5f)
-	  {
-		slotRect.anchoredPosition = new Vector2(slotRect.anchoredPosition.x, targetY);
+		for (int i = 0; i < ItemCnt * 2 * 5 + 2; i++)
+		{
+			gg.anchoredPosition -= new Vector2(0, 29.11f);
+			if (SlotSkillObject[2].transform.localPosition.y < -86.1445f)
+			{
+				SlotSkillObject[2].transform.localPosition += new Vector3(0, 232.88f, 0);
+
+			}
+			yield return null;
+		}
 		Slot[2].interactable = true;
-		break; // while문 종료 (코루틴 끝)
-	  }
 
-	  // 예시: 2초 후 감속 시작
-	  if (elapsed > 1f && !slowingDown)
-	  {
-		slowingDown = true;
-	  }
 
-	  yield return null;
-	  skillNameOb[2].SetActive(true);
-	  DescriptionOb[2].SetActive(true);
 	}
-  }
 
-  void OnSlotClicked(Button ClickedButton)
-  {
-	if(selectedButton != null) return;
 
-	selectedButton = ClickedButton;
 
-	foreach(Button btn in Slot)
+
+
+
+
+
+
+	void OnSlotClicked(Button ClickedButton)
 	{
-	  
-	  btn.interactable = false;
+		if (selectedButton != null) return;
+
+		selectedButton = ClickedButton;
+
+		foreach (Button btn in Slot)
+		{
+
+			btn.interactable = false;
+		}
+		Animator SkillAnim = SkillSlots.GetComponent<Animator>();
+
+		//skill이 들어갈 곳
+
+		SkillAnim.SetTrigger("Play");
+		selectedButton = null;
+		Invoke(nameof(HideCanvas), 1f);
 	}
-	Animator SkillAnim = SkillSlots.GetComponent<Animator>();
-
-	//skill이 들어갈 곳
-
-	SkillAnim.SetTrigger("Play");
-
-	Invoke(nameof(HideCanvas), 1f);
-
-	
-	
-
-  }
 
 
-  public void HideCanvas()
-  {
-	SkillSlot.SetActive(false);
+	public void HideCanvas()
+	{
+		SkillSlot.SetActive(false);
 
-  }
+	}
 
 
 

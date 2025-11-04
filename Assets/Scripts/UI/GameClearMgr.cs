@@ -24,7 +24,7 @@ public class GameClearMgr : MonoBehaviour
   void NextStage()
   {
 
-
+        GameManager.Instance.StartNextStage();
 
   }
 
