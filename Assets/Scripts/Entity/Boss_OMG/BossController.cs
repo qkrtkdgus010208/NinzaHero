@@ -24,7 +24,7 @@ public class BossController : MonoBehaviour
 
     private int phase;
     private int energySpawnPosCount = 0;
-    private int touchDamage = 200;
+    private int touchDamage = 1000;
     private float delay = 4.0f;
     private float time;
 
@@ -153,6 +153,7 @@ public class BossController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("¡¢√À!!!!!");
             ResourceController resource = collision.GetComponent<ResourceController>();
             if (resource != null)
             {

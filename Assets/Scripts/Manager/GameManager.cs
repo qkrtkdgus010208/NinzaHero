@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if(stageManager.ActiveStage == 5) isBossStage = true;
+        if(stageManager.ActiveStage > 1) isBossStage = true;
     }
 
     public void StartGame()
