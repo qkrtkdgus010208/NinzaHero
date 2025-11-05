@@ -16174,11 +16174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
       propertyPath: spawnCount.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
       propertyPath: spawnCount.Array.data[1]
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7054501456943461232, guid: 41b796e0f6040c34a990f31320ee3761, type: 3}
       propertyPath: spawnPoints.Array.data[0]
