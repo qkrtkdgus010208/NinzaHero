@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Hpbar : MonoBehaviour
 {
-  [SerializeField] private float _health = 2000; //최대체력
+  [SerializeField] private float _health = 1000; //최대체력
   [SerializeField] RectTransform _barRect;
   [SerializeField] private RectMask2D _mask;
   [Range(0f, 100f)][SerializeField] private float DamageHealth = 0;
