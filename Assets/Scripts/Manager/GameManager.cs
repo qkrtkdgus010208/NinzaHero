@@ -1,18 +1,99 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerController player { get; private set; }
+    public ResourceController playerResourceController;
+
+    private EnemyManager enemyManager;
+
+    public UIManager uiManager;
+    public EnemyManager EnemyManager { get { return enemyManager; } }
+
+    private StageManager stageManager;
+    public StageManager StageManager { get { return stageManager; } }
+
+    public bool isBossStage = false;
+
+    public static bool isFirstLoading = true;
+
+    [SerializeField] private CameraConfinerSetter cameraConfinerSetter;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+
+        enemyManager = GetComponentInChildren<EnemyManager>();
+        stageManager = GetComponentInChildren<StageManager>();
+
+
+        enemyManager.Init(this);
+        stageManager.Init(this);
+
+
+
+        player = FindAnyObjectByType<PlayerController>();
+        player.Init(this, enemyManager);
+        uiManager = GetComponentInChildren<UIManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        StartGame();
+    }
+
+    private void Update()
+    {
+        if(stageManager.ActiveStage > 1) isBossStage = true;
+    }
+
+    public void StartGame()
+    {
+        StartNextStage();
+
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
+    }
+
+    public bool StartNextStage()
+    { 
+        player.transform.position = new Vector3(0f, -7f, 0f);
+        stageManager.StartStage();
+
+        cameraConfinerSetter.SetConfinerBoundingShape(stageManager.ActiveStageController.polygonCollider);
+        uiManager.ShowSkillSlot();
+        return true;
+    }
+
+    public void EndOfStage()
+    {
+        if (BossController.instance != null)
+        {
+            if (!BossController.instance.isAlive)
+            {
+                StartNextStage();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            StartNextStage();
+        }
+    }
+
+    public void GameOver()
+    {
+
+        uiManager.ShowGameOver();
     }
 }
