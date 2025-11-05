@@ -39,6 +39,7 @@ public class TailAttack : MonoBehaviour
 
     public void SetDamage(Collider2D collision)
     {
+        Debug.Log("플레이어 피격!");
         if(PlayerCollisionLayer.value == (PlayerCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
             ResourceController resource = collision.GetComponent<ResourceController>();
