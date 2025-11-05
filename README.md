@@ -92,8 +92,8 @@ Not deployed — project runs within Unity Editor
 
 ## 와이어프레임
 https://www.figma.com/design/2Q7gs7zN4sccNjsMLvHYIn/제목-없음?node-id=0-1&t=4KLTH6f4my6uLI13-1
-
-
+<img width="1144" height="602" alt="Image" src="https://github.com/user-attachments/assets/594fa140-c69d-47e7-a754-c8cc75042c60" />
+<img width="498" height="454" alt="Image" src="https://github.com/user-attachments/assets/f423caa5-1a84-4772-af6e-4f8ec3a9a401" />
 
 ## API 명세서
 
