@@ -137,9 +137,9 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg  = SlotSkillObject[0].GetComponent<RectTransform>();
 		
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < 12*16; i++)
 		{
-			gg.anchoredPosition -= new Vector2( 0, 29.11445f);
+			gg.anchoredPosition -= new Vector2( 0, 3.63930625f);
 			if (SlotSkillObject[0].transform.localPosition.y < -29.1289f)
 			{
 				SlotSkillObject[0].transform.localPosition += new Vector3 (0, 58.2289f, 0);
@@ -158,9 +158,9 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg = SlotSkillObject[1].GetComponent<RectTransform>();
 
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < 12*16; i++)
 		{
-			gg.anchoredPosition -= new Vector2(0, 29.11445f);
+			gg.anchoredPosition -= new Vector2(0, 3.63930625f);
 			if (SlotSkillObject[1].transform.localPosition.y <= -29.1289f)
 			{
 				SlotSkillObject[1].transform.localPosition += new Vector3(0, 58.2289f, 0);
@@ -178,9 +178,9 @@ public class SlotMachineMgr : MonoBehaviour
 
 		RectTransform gg = SlotSkillObject[2].GetComponent<RectTransform>();
 
-		for (int i = 0; i < 12 ; i++)
+		for (int i = 0; i < 12*16 ; i++)
 		{
-			gg.anchoredPosition -= new Vector2(0, 29.11445f);
+			gg.anchoredPosition -= new Vector2(0, 3.63930625f);
 			if (SlotSkillObject[2].transform.localPosition.y < -29.1289f)
 			{
 				SlotSkillObject[2].transform.localPosition += new Vector3(0, 58.2289f, 0);
