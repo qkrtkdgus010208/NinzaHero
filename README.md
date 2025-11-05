@@ -7,12 +7,7 @@
 4. [주요기능](#주요기능)
 5. [개발기간](#개발기간)
 6. [기술스택](#기술스택)
-7. [서비스 구조](#서비스-구조)
 8. [와이어프레임](#와이어프레임)
-9. [API 명세서](#API-명세서)
-10. [ERD](#ERD)
-11. [프로젝트 파일 구조](#프로젝트-파일-구조)
-12. [Trouble Shooting](#trouble-shooting)
     
 ## 👨‍🏫 프로젝트 소개
 
@@ -25,12 +20,7 @@
 4. [주요기능](#주요기능)
 5. [개발기간](#개발기간)
 6. [기술스택](#기술스택)
-7. [서비스 구조](#서비스-구조)
 8. [와이어프레임](#와이어프레임)
-9. [API 명세서](#API-명세서)
-10. [ERD](#ERD)
-11. [프로젝트 파일 구조](#프로젝트-파일-구조)
-12. [Trouble Shooting](#trouble-shooting)
     
 ## 👨‍🏫 프로젝트 소개
 
@@ -78,36 +68,14 @@
 
 ### ✔️ Language
 c#
-
 ### ✔️ Version Control
 Git, GitHub
 ### ✔️ IDE
 Visual Studio
 ### ✔️ Framework
 Unity : .NET Standard2.1
-### ✔️ Deploy
-Not deployed — project runs within Unity Editor
-
-### ✔️  DBMS
-
-## 서비스 구조
-
-
 
 ## 와이어프레임
 https://www.figma.com/design/2Q7gs7zN4sccNjsMLvHYIn/제목-없음?node-id=0-1&t=4KLTH6f4my6uLI13-1
 <img width="1144" height="602" alt="Image" src="https://github.com/user-attachments/assets/594fa140-c69d-47e7-a754-c8cc75042c60" />
 <img width="498" height="454" alt="Image" src="https://github.com/user-attachments/assets/f423caa5-1a84-4772-af6e-4f8ec3a9a401" />
-
-## API 명세서
-
-
-## ERD
-
-
-## 프로젝트 파일 구조
-
-
-
-
-## Trouble Shooting
