@@ -35,7 +35,7 @@ public class GameClearMgr : MonoBehaviour
   void NextStage()
   {
 
-        GameManager.Instance.StartNextStage();
+        SceneManager.LoadScene("GameScene");
 		GameManager.Instance.uiManager.isGameClear = true;
 		GameManager.Instance.uiManager.GameClear.SetActive(false);
 		GameManager.Instance.uiManager.BossHealth.SetActive(false);
