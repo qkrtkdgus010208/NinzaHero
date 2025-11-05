@@ -51,7 +51,7 @@ public class ProjectileController : MonoBehaviour
 
             if (bossHp != null)
             {
-                bossHp.Damaged(50);
+                bossHp.Damaged(-rangeWeaponHandler.Power);
             }
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))

@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    [Range(0, 2000)][SerializeField] private int hp = 2000;
-    public int Hp
+    [Range(0, 2000)][SerializeField] private float hp = 2000;
+    public float Hp
     {
         get => hp;
         set => Mathf.Clamp(value, 0, 2000);
@@ -123,7 +123,7 @@ public class BossController : MonoBehaviour
         }
     }
 
-    public void Damaged(int damage)
+    public void Damaged(float damage)
     {
         hp -= damage;
 
