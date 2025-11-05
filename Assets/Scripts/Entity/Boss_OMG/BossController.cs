@@ -125,7 +125,7 @@ public class BossController : MonoBehaviour
 
     public void Damaged(float damage)
     {
-        hp -= damage;
+        hp += damage;
 
         Debug.Log(hp);
 
