@@ -38,9 +38,8 @@ public class UIManager : MonoBehaviour
 		{
 			Debug.Log("isGameClear == true");
 
-			GameClear.SetActive(false);
-			BossHealth.SetActive(false);
 			isGameClear = false;
+		
 		}
 
 	}
@@ -49,9 +48,13 @@ public class UIManager : MonoBehaviour
 	void BossSpawned()
 	{
 
-		if (BossController.instance.isAlive == false)
+		if (BossController.instance.isAlive == false&&BossController.instance != null)
 		{
 			GameClear.SetActive(true);
+		}
+		if(BossController.instance == null)
+		{
+			BossHealth.SetActive(false);
 		}
 
 

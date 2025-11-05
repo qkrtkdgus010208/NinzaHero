@@ -37,6 +37,7 @@ public class EnemyController : BaseController
         {
             // 바라 보게 하기
             lookDirection = direction;
+            movementDirection = direction;
 
             // 공격 무기에 대한 준비가 되어 있는지
             if (weaponHandler != null && weaponHandler.enabled)
@@ -45,14 +46,12 @@ public class EnemyController : BaseController
                 if (distance <= weaponHandler.AttackRange)
                 {
                     isAttacking = true;
-                    movementDirection = Vector2.zero;
                     return;
                 }
             }
-
         }
-
-        movementDirection = direction;
+        else
+            movementDirection = Vector2.zero;
     }
 
     private float DistanceToTarget() => Vector3.Distance(transform.position, target.transform.position);

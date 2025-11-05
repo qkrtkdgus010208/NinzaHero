@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -107,7 +107,7 @@ public void OnClickStartButton()
   IEnumerator wait()
   {
     yield return new WaitForSeconds(1f);
-	SceneManager.LoadScene("GameScene_sdh");
+	SceneManager.LoadScene("GameScene");
   }
 
 

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,11 @@ public class MeleeWeaponHandler : WeaponHandler
     {
         base.Attack();
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, AttackRange, Vector2.zero, 0, target);
+
+        if (hit.collider == null)
+        {
+            return;
+        }
 
         ResourceController resourceController = hit.collider.GetComponent<ResourceController>();
         if (resourceController != null)

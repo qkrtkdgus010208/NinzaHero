@@ -750,6 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593882248267428596}
+  - component: {fileID: 1394069643309569791}
   m_Layer: 5
   m_Name: GameClear 1
   m_TagString: Untagged
@@ -783,6 +784,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1394069643309569791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064657384749613681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5cdc9f1c303434f829f525c4cf285b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Main: {fileID: 5429479153538343033}
+  Next: {fileID: 7255162507765035923}
 --- !u!1 &6318288136365052246
 GameObject:
   m_ObjectHideFlags: 0

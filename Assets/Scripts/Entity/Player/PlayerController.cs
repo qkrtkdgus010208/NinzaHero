@@ -17,7 +17,7 @@ public class PlayerController : BaseController
 
     private Transform FindNearestTarget()
     {
-        float nearestDistance = float.MaxValue;
+        float nearestDistance = weaponHandler.AttackRange;
         Transform nearestTarget = null;
 
         if (enemyManager == null || enemyManager.activeEnemies == null || enemyManager.activeEnemies.Count == 0)
@@ -33,7 +33,7 @@ public class PlayerController : BaseController
             }
         }
 
-        foreach (var enemy in enemyManager.activeEnemies)
+        foreach (EnemyController enemy in enemyManager.activeEnemies)
         {
             if (enemy != null && enemy.transform != null)
             {

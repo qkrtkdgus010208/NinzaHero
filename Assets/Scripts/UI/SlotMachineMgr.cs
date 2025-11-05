@@ -62,7 +62,18 @@ public class SlotMachineMgr : MonoBehaviour
 	{
 		for (int i = 0; i < ItemCnt * Slot.Length; i++)//6
 		{
-			StartList.Add(i);//
+			if (GameManager.Instance.StageManager.ActiveStage == 0 && i ==2)
+			{
+				
+
+			    StartList.Add(3);
+				
+			}
+			else
+			{
+				StartList.Add(i);
+			}
+				
 		}
 		for (int i = 0; i < Slot.Length; i++)//slot1 slot2 slot3    
 		{
