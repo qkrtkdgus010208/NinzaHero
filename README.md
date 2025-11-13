@@ -1,5 +1,11 @@
 # 닌자의 전설
 
+## 📷 스크린샷
+<img width="200" height="400" alt="스크린샷 2025-11-13 161205" src="https://github.com/user-attachments/assets/3931a64c-76cf-4689-89bb-c1ff28ddf3ec" />
+<img width="200" height="400" alt="스크린샷 2025-11-13 161216" src="https://github.com/user-attachments/assets/33e88aed-1d61-4310-bd76-6d269d113950" />
+<img width="200" height="400" alt="스크린샷 2025-11-13 161417" src="https://github.com/user-attachments/assets/de4de33c-a22b-4f97-92d5-1f1d09df8684" />
+<img width="200" height="400" alt="스크린샷 2025-11-13 161633" src="https://github.com/user-attachments/assets/3467603e-fd07-4953-bb48-0f969cb36e2d" />
+
 ## 📖 목차
 1. [프로젝트 소개](#프로젝트-소개)
 2. [팀소개](#팀소개)
@@ -67,9 +73,3 @@ Unity : .NET Standard2.1
 https://www.figma.com/design/2Q7gs7zN4sccNjsMLvHYIn/제목-없음?node-id=0-1&t=4KLTH6f4my6uLI13-1
 <img width="1144" height="602" alt="Image" src="https://github.com/user-attachments/assets/594fa140-c69d-47e7-a754-c8cc75042c60" />
 <img width="498" height="454" alt="Image" src="https://github.com/user-attachments/assets/f423caa5-1a84-4772-af6e-4f8ec3a9a401" />
-
-## 📷 스크린샷
-<img width="200" height="400" alt="스크린샷 2025-11-13 161205" src="https://github.com/user-attachments/assets/3931a64c-76cf-4689-89bb-c1ff28ddf3ec" />
-<img width="200" height="400" alt="스크린샷 2025-11-13 161216" src="https://github.com/user-attachments/assets/33e88aed-1d61-4310-bd76-6d269d113950" />
-<img width="200" height="400" alt="스크린샷 2025-11-13 161417" src="https://github.com/user-attachments/assets/de4de33c-a22b-4f97-92d5-1f1d09df8684" />
-<img width="200" height="400" alt="스크린샷 2025-11-13 161633" src="https://github.com/user-attachments/assets/3467603e-fd07-4953-bb48-0f969cb36e2d" />
